@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-
-export default function PizzaCard({ name, imageUrl, price, types, sizes }) {
+import ContentLoader from "react-content-loader";
+import { PizzaLoader } from "..";
+import Button from "../button/Button";
+export default function PizzaCard({
+  id,
+  name,
+  imageUrl,
+  price,
+  types,
+  sizes,
+  onClickAddPizza,
+}) {
   const typesNames = ["тонкое", "традиционное"];
   const typeSize = [26, 30, 40];
 
   const [activeType, setActivType] = useState(types[0]);
-  const [activeSize, setActiveSize] = useState(sizes[0]);
+  const [activeSize, setActiveSize] = useState(0);
+
+  // if (isLoading === true) {
+  //   return <PizzaLoader />;
+  // }
 
   const onSelectType = (index) => {
     setActivType(index);
@@ -15,6 +29,18 @@ export default function PizzaCard({ name, imageUrl, price, types, sizes }) {
 
   const onSelectSize = (index) => {
     setActiveSize(index);
+  };
+
+  const onAddPizza = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      type: typeSize[activeType],
+      size: typeSize[activeSize],
+    };
+    onClickAddPizza(obj);
   };
 
   return (
@@ -51,7 +77,7 @@ export default function PizzaCard({ name, imageUrl, price, types, sizes }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <Button onClick={onAddPizza} className="button--add" outline>
           <svg
             width="12"
             height="12"
@@ -66,21 +92,23 @@ export default function PizzaCard({ name, imageUrl, price, types, sizes }) {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </Button>
       </div>
     </div>
   );
 }
 
 PizzaCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  types: PropTypes.arrayOf(PropTypes.number).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  name: PropTypes.string,
+  imageUrl: PropTypes.string,
+  price: PropTypes.number,
+  types: PropTypes.arrayOf(PropTypes.number),
+  sizes: PropTypes.arrayOf(PropTypes.number),
+  isLoading: PropTypes.bool,
 };
 
 PizzaCard.defaultProps = {
   types: [],
   sizes: [],
+  isLoading: false,
 };

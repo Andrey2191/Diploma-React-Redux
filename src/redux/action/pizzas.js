@@ -1,9 +1,22 @@
 import axios from "axios";
 
-export const fetchPizzas = () => {
-  axios.get("http://localhost:3333/db.json").then(({ data }) => {
-    setPizzas(data.pizzas);
-  });
+export const setLoaded = (payload) => ({
+  type: "SET_LOADED",
+  payload,
+});
+
+export const fetchPizzas = (sortBy, category) => (dispatch) => {
+  dispatch(setLoaded(false));
+
+  axios
+    .get(
+      `http://localhost:3333/pizzas?${
+        category !== null ? `category=${category}` : ""
+      }&_sort=${sortBy}&_order=desc`
+    )
+    .then(({ data }) => {
+      dispatch(setPizzas(data));
+    });
 };
 
 export const setPizzas = (items) => ({

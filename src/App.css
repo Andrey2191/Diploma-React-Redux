@@ -331,7 +331,7 @@ a {
   margin-bottom: 65px;
 }
 .pizza-block:not(:nth-of-type(4n)) {
-  margin-right: 35px;
+  margin-right: 3.7%;
 }
 .pizza-block__image {
   width: 260px;
@@ -435,7 +435,7 @@ body {
   flex-wrap: wrap;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .content__top {
   display: -webkit-box;
@@ -454,7 +454,7 @@ body {
 }
 .container--cart {
   max-width: 820px;
-  margin: 90px auto;
+  margin: 0px auto;
 }
 .container--cart .content__title {
   margin: 0;
