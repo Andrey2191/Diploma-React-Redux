@@ -11,6 +11,7 @@ const CartItem = ({
   onRemove,
   onMinus,
   onPlus,
+  imageUrl,
 }) => {
   const handleRemoveClick = () => {
     onRemove(id);
@@ -27,11 +28,7 @@ const CartItem = ({
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img
-          className="pizza-block__image"
-          src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-          alt="Pizza"
-        />
+        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       </div>
       <div className="cart__item-info">
         <h3>{name}</h3>

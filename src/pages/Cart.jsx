@@ -126,6 +126,7 @@ function Cart() {
               <CartItem
                 key={obj.id}
                 id={obj.id}
+                imageUrl={obj.imageUrl}
                 name={obj.name}
                 type={obj.type}
                 size={obj.size}
