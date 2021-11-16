@@ -1,12 +1,9 @@
+import React from "react";
 import "./App.css";
 
-import { Header } from "./components/index";
-import { Home, Cart } from "./pages/index";
-import { Route } from "react-router";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-import { useDispatch } from "react-redux";
+import { Header } from "./components";
+import { Home, Cart } from "./pages";
+import { Route } from "react-router-dom";
 
 function App() {
   return (

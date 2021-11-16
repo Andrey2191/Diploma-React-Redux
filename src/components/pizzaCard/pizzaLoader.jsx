@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-export default function PizzaLoader() {
+export default function LoadingBlock() {
   return (
     <ContentLoader
       className="pizza-block"

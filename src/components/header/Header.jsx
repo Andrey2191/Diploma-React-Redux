@@ -1,10 +1,11 @@
 import React from "react";
-import logoSvg from "../../assets/img/pizza-logo.svg";
-import { Button } from "../index";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Header() {
+import logoSvg from "../../assets/img/pizza-logo.svg";
+import Button from "../button/Button";
+
+function Header() {
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
 
   return (
@@ -15,7 +16,7 @@ export default function Header() {
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>
-              <p>Самая вкусная пицца во вселенной</p>
+              <p>самая вкусная пицца во вселенной</p>
             </div>
           </div>
         </Link>
@@ -23,7 +24,6 @@ export default function Header() {
         <div className="header__cart">
           <Link to="/cart">
             <Button className="button--cart">
-              {" "}
               <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
@@ -63,3 +63,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default Header;

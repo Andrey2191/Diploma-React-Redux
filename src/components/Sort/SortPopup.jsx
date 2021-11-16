@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 const SortPopup = React.memo(function SortPopup({
@@ -6,19 +6,17 @@ const SortPopup = React.memo(function SortPopup({
   activeSortType,
   onClickSortType,
 }) {
-  const [visiblePopup, setVisiblePopup] = useState(false);
-
-  const sortRef = useRef(null);
-  const activeName = items.find((obj) => obj.type === activeSortType).name;
-
-  console.log(onClickSortType);
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
+  const sortRef = React.useRef();
+  const activeLabel = items.find((obj) => obj.type === activeSortType).name;
 
   const toggleVisiblePopup = () => {
     setVisiblePopup(!visiblePopup);
   };
 
-  const clickOut = (e) => {
-    if (!e.path.includes(sortRef.current)) {
+  const handleOutsideClick = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(sortRef.current)) {
       setVisiblePopup(false);
     }
   };
@@ -30,14 +28,15 @@ const SortPopup = React.memo(function SortPopup({
     setVisiblePopup(false);
   };
 
-  useEffect(() => {
-    document.body.addEventListener("click", clickOut);
+  React.useEffect(() => {
+    document.body.addEventListener("click", handleOutsideClick);
   }, []);
 
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
+          className={visiblePopup ? "rotated" : ""}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -50,7 +49,7 @@ const SortPopup = React.memo(function SortPopup({
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>{activeName}</span>
+        <span onClick={toggleVisiblePopup}>{activeLabel}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
@@ -58,7 +57,7 @@ const SortPopup = React.memo(function SortPopup({
             {items &&
               items.map((obj, index) => (
                 <li
-                  onClick={() => onSelectItem(obj.type)}
+                  onClick={() => onSelectItem(obj)}
                   className={activeSortType === obj.type ? "active" : ""}
                   key={`${obj.type}_${index}`}
                 >

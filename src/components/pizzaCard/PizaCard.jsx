@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import classNames from "classnames";
+import React from "react";
 import PropTypes from "prop-types";
-import ContentLoader from "react-content-loader";
-import { PizzaLoader } from "..";
+import classNames from "classnames";
 import Button from "../button/Button";
-export default function PizzaCard({
+
+function PizzaBlock({
   id,
   name,
   imageUrl,
@@ -12,19 +11,16 @@ export default function PizzaCard({
   types,
   sizes,
   onClickAddPizza,
+  addedCount,
 }) {
-  const typesNames = ["тонкое", "традиционное"];
-  const typeSize = [26, 30, 40];
+  const availableTypes = ["тонкое", "традиционное"];
+  const availableSizes = [26, 30, 40];
 
-  const [activeType, setActivType] = useState(types[0]);
-  const [activeSize, setActiveSize] = useState(0);
-
-  // if (isLoading === true) {
-  //   return <PizzaLoader />;
-  // }
+  const [activeType, setActiveType] = React.useState(types[0]);
+  const [activeSize, setActiveSize] = React.useState(0);
 
   const onSelectType = (index) => {
-    setActivType(index);
+    setActiveType(index);
   };
 
   const onSelectSize = (index) => {
@@ -37,8 +33,8 @@ export default function PizzaCard({
       name,
       imageUrl,
       price,
-      type: typeSize[activeType],
-      size: typeSize[activeSize],
+      size: availableSizes[activeSize],
+      type: availableTypes[activeType],
     };
     onClickAddPizza(obj);
   };
@@ -49,7 +45,7 @@ export default function PizzaCard({
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {typesNames.map((type, index) => (
+          {availableTypes.map((type, index) => (
             <li
               key={type}
               onClick={() => onSelectType(index)}
@@ -63,7 +59,7 @@ export default function PizzaCard({
           ))}
         </ul>
         <ul>
-          {typeSize.map((size, index) => (
+          {availableSizes.map((size, index) => (
             <li
               key={size}
               onClick={() => onSelectSize(index)}
@@ -71,7 +67,9 @@ export default function PizzaCard({
                 active: activeSize === index,
                 disabled: !sizes.includes(size),
               })}
-            >{`${size} см.`}</li>
+            >
+              {size} см.
+            </li>
           ))}
         </ul>
       </div>
@@ -91,24 +89,28 @@ export default function PizzaCard({
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>
     </div>
   );
 }
 
-PizzaCard.propTypes = {
+PizzaBlock.propTypes = {
   name: PropTypes.string,
   imageUrl: PropTypes.string,
   price: PropTypes.number,
   types: PropTypes.arrayOf(PropTypes.number),
   sizes: PropTypes.arrayOf(PropTypes.number),
-  isLoading: PropTypes.bool,
+  onClickAddPizza: PropTypes.func,
+  addedCount: PropTypes.number,
 };
 
-PizzaCard.defaultProps = {
+PizzaBlock.defaultProps = {
+  name: "---",
+  price: 0,
   types: [],
   sizes: [],
-  isLoading: false,
 };
+
+export default PizzaBlock;
