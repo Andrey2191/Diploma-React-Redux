@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,10 +10,14 @@ import {
   plusCartItem,
   minusCartItem,
 } from "../redux/actions/cart";
+import CartModal from "../components/cartModal/CartModal";
+import OrderModal from "../components/cartModal/OrderModal";
 
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
+  const [modalActive, setModalActive] = useState(false);
+  const [orderModalActive, setOrderModalActive] = useState(false);
 
   const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
@@ -41,6 +45,21 @@ function Cart() {
 
   const onClickOrder = () => {
     console.log("ВАШ ЗАКАЗ", items);
+    setModalActive(true);
+  };
+
+  const closeModal = () => {
+    setModalActive(false);
+    setOrderModalActive(false);
+  };
+
+  const openOrederModal = () => {
+    setModalActive(false);
+    setOrderModalActive(true);
+  };
+
+  const randomOrder = (min, max) => {
+    return Math.floor(Math.random() * (max - min));
   };
 
   return (
@@ -193,6 +212,18 @@ function Cart() {
           </Link>
         </div>
       )}
+      <CartModal
+        active={modalActive}
+        setActive={setModalActive}
+        onCancel={closeModal}
+        onSubmit={openOrederModal}
+      />
+      <OrderModal
+        activeOrder={orderModalActive}
+        setActiveOrder={setOrderModalActive}
+        onCancel={closeModal}
+        orderNumber={randomOrder(1, 1000)}
+      />
     </div>
   );
 }

@@ -5,15 +5,29 @@ export const setLoaded = (payload) => ({
   payload,
 });
 
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+});
+
 export const fetchPizzas = (sortBy, category) => (dispatch) => {
   dispatch({
     type: "SET_LOADED",
     payload: false,
   });
 
-  axios
+  //   axios
+  //     .get(
+  //       `http://localhost:3333/pizzas?${
+  //         category !== null ? `category=${category}` : ""
+  //       }&_sort=${sortBy}&_order=desc`
+  //     )
+  //     .then(({ data }) => {
+  //       dispatch(setPizzas(data));
+  //     });
+  // };
+  api
     .get(
-      `http://localhost:3001/pizzas?${
+      `pizzas?${
         category !== null ? `category=${category}` : ""
       }&_sort=${sortBy}&_order=desc`
     )
