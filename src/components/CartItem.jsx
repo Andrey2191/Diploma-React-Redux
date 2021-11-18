@@ -82,7 +82,7 @@ const CartItem = ({
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{totalPrice} ₽</b>
+        <b>{totalPrice} руб.</b>
       </div>
       <div className="cart__item-remove">
         <Button onClick={handleRemoveClick} className="button--circle" outline>
