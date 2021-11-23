@@ -7,7 +7,6 @@ export default function OrderModal({
   orderNumber,
   onCancel,
 }) {
-  console.log(setActiveOrder);
   return (
     <div
       className={activeOrder ? "order order-active" : "order"}

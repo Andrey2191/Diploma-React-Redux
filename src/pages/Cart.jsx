@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import cartEmptyImage from "../assets/img/empty-cart.png";
-import { CartItem, Button } from "../components/index";
+import { CartItem, Button, SaucesCard } from "../components/index";
 import {
   clearCart,
   removeCartItem,
@@ -12,12 +12,14 @@ import {
 } from "../redux/actions/cart";
 import CartModal from "../components/cartModal/CartModal";
 import OrderModal from "../components/cartModal/OrderModal";
+import { fetchSauces } from "../redux/actions/sauces";
 
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
   const [modalActive, setModalActive] = useState(false);
   const [orderModalActive, setOrderModalActive] = useState(false);
+  const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
 
   const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
@@ -166,6 +168,10 @@ function Cart() {
                 Сумма заказа: <b>{totalPrice} руб.</b>
               </span>
             </div>
+            <div className="cart--sauces">
+              {saucesItems &&
+                saucesItems.map((obj) => <SaucesCard key={obj.id} />)}
+            </div>
             <div className="cart__bottom-buttons">
               <a
                 href="/"
@@ -212,6 +218,7 @@ function Cart() {
           </Link>
         </div>
       )}
+
       <CartModal
         active={modalActive}
         setActive={setModalActive}

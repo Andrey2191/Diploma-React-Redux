@@ -815,3 +815,9 @@ body {
 .modal--order-description {
   margin-top: 10px;
 }
+
+.sauces--card {
+  width: 150px;
+  height: 150px;
+  background-color: #111;
+}
