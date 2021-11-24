@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import useEffect from "react";
 
 import cartEmptyImage from "../assets/img/empty-cart.png";
 import { CartItem, Button, SaucesCard } from "../components/index";
@@ -20,6 +21,10 @@ function Cart() {
   const [modalActive, setModalActive] = useState(false);
   const [orderModalActive, setOrderModalActive] = useState(false);
   const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
+
+  React.useEffect(() => {
+    dispatch(fetchSauces);
+  }, []);
 
   const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
@@ -159,6 +164,18 @@ function Cart() {
               />
             ))}
           </div>
+          <span>Дополнительно</span>
+          <div className="cart--sauces">
+            {saucesItems &&
+              saucesItems.map((obj) => (
+                <SaucesCard
+                  key={obj.id}
+                  name={obj.name}
+                  imageUrl={obj.imageUrl}
+                  price={obj.price}
+                />
+              ))}
+          </div>
           <div className="cart__bottom">
             <div className="cart__bottom-details">
               <span>
@@ -168,10 +185,7 @@ function Cart() {
                 Сумма заказа: <b>{totalPrice} руб.</b>
               </span>
             </div>
-            <div className="cart--sauces">
-              {saucesItems &&
-                saucesItems.map((obj) => <SaucesCard key={obj.id} />)}
-            </div>
+
             <div className="cart__bottom-buttons">
               <a
                 href="/"

@@ -817,7 +817,42 @@ body {
 }
 
 .sauces--card {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 250px;
+}
+
+.sauces--image {
   width: 150px;
   height: 150px;
-  background-color: #111;
+}
+
+.cart--sauces {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.sauces--card-title span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sauces--card-title {
+  text-align: center;
+}
+
+.sauces--card-footer span {
+  font-weight: 600;
+}
+.sauces--card-footer {
+  text-align: center;
+}
+
+.sauces--card-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
