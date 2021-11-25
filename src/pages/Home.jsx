@@ -1,5 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from "../hooks/use-auth";
+import { Redirect } from "react-router-dom";
+import { removeUser } from "../redux/slices/userSlice";
 
 import {
   Categories,
@@ -32,6 +35,8 @@ function Home() {
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
+  const { isAuth, email } = useAuth();
+
   React.useEffect(() => {
     dispatch(fetchPizzas(sortBy, category));
   }, [category, sortBy]);
@@ -51,7 +56,7 @@ function Home() {
     });
   };
 
-  return (
+  return isAuth ? (
     <div className="container">
       <div className="content__top">
         <Categories
@@ -80,7 +85,12 @@ function Home() {
               .fill(0)
               .map((_, index) => <PizzaLoadingBlock key={index} />)}
       </div>
+      <button onClick={() => dispatch(removeUser())}>
+        Log out from {email}
+      </button>
     </div>
+  ) : (
+    <Redirect to="/login" />
   );
 }
 
