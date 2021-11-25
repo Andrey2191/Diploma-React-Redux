@@ -14,6 +14,8 @@ import {
 import CartModal from "../components/cartModal/CartModal";
 import OrderModal from "../components/cartModal/OrderModal";
 import { fetchSauces } from "../redux/actions/sauces";
+import { useAuth } from "../hooks/use-auth";
+import { Redirect } from "react-router-dom";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ function Cart() {
   const [modalActive, setModalActive] = useState(false);
   const [orderModalActive, setOrderModalActive] = useState(false);
   const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
+  const { isAuth, email } = useAuth();
 
   React.useEffect(() => {
     dispatch(fetchSauces);
@@ -69,7 +72,7 @@ function Cart() {
     return Math.floor(Math.random() * (max - min));
   };
 
-  return (
+  return isAuth ? (
     <div className="container container--cart">
       {totalCount ? (
         <div className="cart">
@@ -246,6 +249,8 @@ function Cart() {
         orderNumber={randomOrder(1, 1000)}
       />
     </div>
+  ) : (
+    <Redirect to="/login" />
   );
 }
 
