@@ -21,12 +21,12 @@ export const LoginForm = () => {
         );
         push("/");
       })
-      .catch(console.error);
+      .catch(() => alert("Пользователь не найден!"));
   };
 
   return (
     <div>
-      <Form title="Sign in" handleClick={handleLogin} />
+      <Form title="Войти" handleClick={handleLogin} />
     </div>
   );
 };

@@ -4,11 +4,14 @@ import { SignUpForm } from "../components/signUp/SignUp";
 
 function Register() {
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="login--form">
+      <h1>Регистрация</h1>
       <SignUpForm />
       <p>
-        Already have account? <Link to="/login">Login</Link>
+        У вас уже есть аккаунт?{" "}
+        <Link className="btn-register" to="/login">
+          Войти
+        </Link>
       </p>
     </div>
   );

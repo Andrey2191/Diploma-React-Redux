@@ -856,3 +856,74 @@ body {
   justify-content: space-around;
   align-items: center;
 }
+
+.login--page {
+  text-align: center;
+}
+
+.login--form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login--form input {
+  margin-top: 15px;
+  width: 200px;
+  height: 30px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  border: 1px solid #8d8d8d;
+}
+
+.login--form button {
+  margin-bottom: 15px;
+  margin-top: 20px;
+  width: 200px;
+  height: 30px;
+  border-radius: 7px;
+  border: none;
+  background-color: #fe5f1e;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.login--form button:hover {
+  background-color: #f24701;
+}
+
+.btn-register {
+  font-weight: bold;
+}
+
+.btn-register:hover {
+  color: #f24701;
+  cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.logout {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.btn--logout {
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: #fe5f1e;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn--logout:hover {
+  background-color: #f24701;
+}

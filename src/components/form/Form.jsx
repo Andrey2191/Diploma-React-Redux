@@ -5,7 +5,7 @@ export const Form = ({ title, handleClick }) => {
   const [pass, setPass] = useState("");
 
   return (
-    <div>
+    <div className="login--form">
       <input
         type="email"
         value={email}

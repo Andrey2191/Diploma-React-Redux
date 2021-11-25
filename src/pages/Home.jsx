@@ -85,9 +85,6 @@ function Home() {
               .fill(0)
               .map((_, index) => <PizzaLoadingBlock key={index} />)}
       </div>
-      <button onClick={() => dispatch(removeUser())}>
-        Log out from {email}
-      </button>
     </div>
   ) : (
     <Redirect to="/login" />

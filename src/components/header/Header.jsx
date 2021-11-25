@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { removeUser } from "../../redux/slices/userSlice";
+import { useAuth } from "../../hooks/use-auth";
+import { useDispatch } from "react-redux";
 import logoSvg from "../../assets/img/pizza-logo.svg";
 import Button from "../button/Button";
 
 function Header() {
+  const dispatch = useDispatch();
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
+  const { isAuth, email } = useAuth();
 
-  return (
+  return isAuth ? (
     <div className="header">
       <div className="container">
         <Link to="/">
@@ -58,9 +62,20 @@ function Header() {
               <span>{totalCount}</span>
             </Button>
           </Link>
+          <div className="logout">
+            <span>{email}</span>
+            <button
+              className="btn--logout"
+              onClick={() => dispatch(removeUser())}
+            >
+              Выйти
+            </button>
+          </div>
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 }
 

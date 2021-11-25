@@ -4,11 +4,13 @@ import { LoginForm } from "../components/login/Login";
 
 export default function Login() {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login--page">
+      <h1>Войдите в учётную запись</h1>
       <LoginForm />
       <p>
-        Or <Link to="/register">Register</Link>
+        <Link className="btn-register" to="/register">
+          Зарегестрироваться
+        </Link>
       </p>
     </div>
   );
