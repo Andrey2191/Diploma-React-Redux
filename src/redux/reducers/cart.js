@@ -113,6 +113,30 @@ const cart = (state = initialState, action) => {
     case "CLEAR_CART":
       return { totalPrice: 0, totalCount: 0, items: {} };
 
+    case "ADD_SAUCES_CART": {
+      const currentSaucesItems = !state.items[action.payload.id]
+        ? [action.payload]
+        : [...state.items[action.payload.id].items, action.payload];
+
+      const newItems = {
+        ...state.items,
+        [action.payload.id]: {
+          items: currentSaucesItems,
+          totalPrice: getTotalPrice(currentSaucesItems),
+        },
+      };
+
+      const totalCount = getTotalSum(newItems, "items.length");
+      const totalPrice = getTotalSum(newItems, "totalPrice");
+
+      return {
+        ...state,
+        items: newItems,
+        totalCount,
+        totalPrice,
+      };
+    }
+
     default:
       return state;
   }

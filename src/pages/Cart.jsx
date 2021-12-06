@@ -16,6 +16,7 @@ import OrderModal from "../components/cartModal/OrderModal";
 import { fetchSauces } from "../redux/actions/sauces";
 import { useAuth } from "../hooks/use-auth";
 import { Redirect } from "react-router-dom";
+import { addSaucesToCart } from "../redux/actions/cart";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -70,6 +71,13 @@ function Cart() {
 
   const randomOrder = (min, max) => {
     return Math.floor(Math.random() * (max - min));
+  };
+
+  const handleAddSaucesToCart = (obj) => {
+    dispatch({
+      type: "ADD_SAUCES_CART",
+      payload: obj,
+    });
   };
 
   return isAuth ? (
@@ -176,6 +184,7 @@ function Cart() {
                   name={obj.name}
                   imageUrl={obj.imageUrl}
                   price={obj.price}
+                  onClickAddSauces={handleAddSaucesToCart}
                 />
               ))}
           </div>

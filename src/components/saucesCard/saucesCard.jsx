@@ -1,7 +1,23 @@
 import React from "react";
 import Button from "../button/Button";
 
-export default function SaucesCard({ id, name, imageUrl, price }) {
+export default function SaucesCard({
+  id,
+  name,
+  imageUrl,
+  price,
+  onClickAddSauces,
+}) {
+  const onAddSauces = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+    };
+    onClickAddSauces(obj);
+  };
+
   return (
     <div className="sauces--card">
       <div className="sauces--card-header">
@@ -12,7 +28,7 @@ export default function SaucesCard({ id, name, imageUrl, price }) {
       </div>
       <div className="sauces--card-footer">
         <span>{`${price} руб`}</span>
-        <Button className="button--circle" outline>
+        <Button onClick={onAddSauces} className="button--circle" outline>
           +
         </Button>
       </div>

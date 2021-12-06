@@ -21,3 +21,8 @@ export const minusCartItem = (id) => ({
   type: "MINUS_CART_ITEM",
   payload: id,
 });
+
+export const addSaucesToCart = (saucesObj) => ({
+  type: "ADD_SAUCES_CART",
+  payload: saucesObj,
+});
