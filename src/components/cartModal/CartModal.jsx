@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../button/Button";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
-export default function CartModal({ active, setActive, onCancel, onSubmit }) {
+export default function CartModal({
+  active,
+  setActive,
+  onCancel,
+  onSubmit,
+  // valueName,
+  // valueAddress,
+  // valueTelephone,
+  // setValueTelephone,
+  // setValueAddress,
+  // setValueName,
+  // sendOrder,
+}) {
+  const [valueName, setValueName] = useState("");
+  const [valueAddress, setValueAddress] = useState("");
+  const [valueTelephone, setValueTelephone] = useState("");
+
+  const sendOrder = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        name: valueName,
+        address: valueAddress,
+        telephone: valueTelephone,
+      });
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+    console.log(valueName, valueAddress, valueTelephone);
+  };
+
   return (
     <div
       className={active ? "modal active" : "modal"}
@@ -38,21 +71,27 @@ export default function CartModal({ active, setActive, onCancel, onSubmit }) {
               type="text"
               className="modal--input"
               placeholder="Ваше имя"
+              value={valueName}
+              onChange={(e) => setValueName(e.target.value)}
             />
             <input
               className="modal--input"
               type="text"
               placeholder="Введите ваш адрес"
+              value={valueAddress}
+              onChange={(e) => setValueAddress(e.target.value)}
             />
             <input
               type="text"
               className="modal--input"
               placeholder="Ваш номер телефона"
+              value={valueTelephone}
+              onChange={(e) => setValueTelephone(e.target.value)}
             />
           </div>
         </div>
         <div className="modal--footer">
-          <Button onClick={onSubmit} className="pay-btn">
+          <Button onClick={sendOrder} className="pay-btn">
             <span>Подтвердить</span>
           </Button>
         </div>

@@ -17,6 +17,9 @@ import { fetchSauces } from "../redux/actions/sauces";
 import { useAuth } from "../hooks/use-auth";
 import { Redirect } from "react-router-dom";
 import { addSaucesToCart } from "../redux/actions/cart";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -25,6 +28,26 @@ function Cart() {
   const [orderModalActive, setOrderModalActive] = useState(false);
   const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
   const { isAuth, email } = useAuth();
+
+  // const [valueName, setValueName] = useState("");
+  // const [valueAddress, setValueAddress] = useState("");
+  // const [valueTelephone, setValueTelephone] = useState("");
+
+  // const sendOrder = async () => {
+  //   try {
+  //     const docRef = await addDoc(collection(db, "users"), {
+  //       name: valueName,
+  //       address: valueAddress,
+  //       telephone: valueTelephone,
+  //     });
+  //   } catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+
+  //   console.log(valueName, valueAddress, valueTelephone);
+  // };
+
+  // console.log(setValueName);
 
   React.useEffect(() => {
     dispatch(fetchSauces);
@@ -55,7 +78,7 @@ function Cart() {
   };
 
   const onClickOrder = () => {
-    console.log("ВАШ ЗАКАЗ", items);
+    // console.log("ВАШ ЗАКАЗ", items);
     setModalActive(true);
   };
 
@@ -252,6 +275,13 @@ function Cart() {
         onSubmit={openOrederModal}
       />
       <OrderModal
+        // valueName={valueName}
+        // valueAddress={valueAddress}
+        // valueTelephone={valueTelephone}
+        // setValueTelephone={setValueTelephone}
+        // setValueAddress={setValueAddress}
+        // setValueName={setValueName}
+        // sendOrder={sendOrder}
         activeOrder={orderModalActive}
         setActiveOrder={setOrderModalActive}
         onCancel={closeModal}
