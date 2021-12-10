@@ -6,6 +6,7 @@ import { useAuth } from "../../hooks/use-auth";
 import { useDispatch } from "react-redux";
 import logoSvg from "../../assets/img/pizza-logo.svg";
 import Button from "../button/Button";
+import OrderPage from "../OrderHistoryPage/OrderPage";
 
 function Header() {
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ function Header() {
               Выйти
             </button>
           </div>
+          <Link to="/order">ORDER</Link>
         </div>
       </div>
     </div>

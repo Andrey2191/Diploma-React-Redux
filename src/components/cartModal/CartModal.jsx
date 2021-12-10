@@ -4,6 +4,7 @@ import Button from "../button/Button";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import Input from "../input/Input";
 
 export default function CartModal({
   active,
@@ -67,21 +68,21 @@ export default function CartModal({
         </div>
         <div className="modal--body">
           <div className="info">
-            <input
+            <Input
               type="text"
               className="modal--input"
               placeholder="Ваше имя"
               value={valueName}
               onChange={(e) => setValueName(e.target.value)}
             />
-            <input
+            <Input
               className="modal--input"
               type="text"
               placeholder="Введите ваш адрес"
               value={valueAddress}
               onChange={(e) => setValueAddress(e.target.value)}
             />
-            <input
+            <Input
               type="text"
               className="modal--input"
               placeholder="Ваш номер телефона"
