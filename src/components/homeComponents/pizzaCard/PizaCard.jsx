@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Button from "../button/Button";
+import Button from "../../common/button/Button";
 
 function PizzaBlock({
   id,

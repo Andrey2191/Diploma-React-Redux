@@ -3,22 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import useEffect from "react";
 
-import cartEmptyImage from "../assets/img/empty-cart.png";
-import { CartItem, Button, SaucesCard } from "../components/index";
+import cartEmptyImage from "../../../assets/img/empty-cart.png";
+import { CartItem, Button, SaucesCard } from "../../index";
 import {
   clearCart,
   removeCartItem,
   plusCartItem,
   minusCartItem,
-} from "../redux/actions/cart";
-import CartModal from "../components/cartModal/CartModal";
-import OrderModal from "../components/cartModal/OrderModal";
-import { fetchSauces } from "../redux/actions/sauces";
-import { useAuth } from "../hooks/use-auth";
+} from "../../../redux/actions/cart";
+import CartModal from "../../cartModal/CartModal";
+import OrderModal from "../../cartModal/OrderModal";
+import { fetchSauces } from "../../../redux/actions/sauces";
+import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
-import { addSaucesToCart } from "../redux/actions/cart";
+import { addSaucesToCart } from "../../../redux/actions/cart";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 function Cart() {
@@ -245,9 +245,11 @@ function Cart() {
                   <span>Вернуться назад</span>
                 </Link>
               </a>
-              <Button onClick={onClickOrder} className="pay-btn">
-                <span>Оплатить сейчас</span>
-              </Button>
+              <Link to="/confirm">
+                <Button className="pay-btn">
+                  <span>Оплатить сейчас</span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

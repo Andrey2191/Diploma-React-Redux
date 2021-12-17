@@ -1,6 +1,10 @@
+import { createReducer } from "@reduxjs/toolkit";
+import { addPizzaToCart } from "../actions/cart";
+
 const initialState = {
   items: {},
-  totalPrice: 0,
+  count: {},
+  // totalPrice: 0,
   totalCount: 0,
 };
 
@@ -19,6 +23,21 @@ const getTotalSum = (obj, path) => {
     return sum + value;
   }, 0);
 };
+
+// const cartReducer = createReducer(initialState, (builder) => {
+//   builder.addCase(addPizzaToCart, (state, action) => {
+//     const { id, size, price } = action.payload;
+
+//     if (!state.items?.[id]) {
+//       state.items[id] = {};
+//     }
+
+//     const countBySize = state.items?.[id]?.[size];
+//     state.count[id] = state.count?.[id] ? state.count[id] + 1 : 1;
+//     state.items[id][size] = countBySize ? countBySize + 1 : 1;
+//     state.totalPrice = state.totalPrice + price;
+//   });
+// });
 
 const cart = (state = initialState, action) => {
   switch (action.type) {

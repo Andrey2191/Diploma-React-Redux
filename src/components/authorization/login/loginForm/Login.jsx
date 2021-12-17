@@ -1,10 +1,10 @@
-import { Form } from "../form/Form";
+import { Form } from "../../authorizationForm/Form";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slices/userSlice";
+import { setUser } from "../../../../redux/slices/userSlice";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const { push } = useHistory();
 
@@ -30,3 +30,5 @@ export const LoginForm = () => {
     </div>
   );
 };
+
+export default LoginForm;

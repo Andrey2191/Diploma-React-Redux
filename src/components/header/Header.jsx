@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { removeUser } from "../../redux/slices/userSlice";
-import { useAuth } from "../../hooks/use-auth";
+import { useAuth } from "../authorization/authorizationHook/use-auth";
 import { useDispatch } from "react-redux";
 import logoSvg from "../../assets/img/pizza-logo.svg";
-import Button from "../button/Button";
+import Button from "../common/button/Button";
 import OrderPage from "../OrderHistoryPage/OrderPage";
+import cart from "../../assets/img/cart.svg";
 
 function Header() {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ function Header() {
             <Button className="button--cart">
               <span>{totalPrice} руб.</span>
               <div className="button__delimiter"></div>
-              <svg
+              <img width={20} src={cart} />
+              {/* <svg
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
@@ -59,7 +61,7 @@ function Header() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-              </svg>
+              </svg> */}
               <span>{totalCount}</span>
             </Button>
           </Link>

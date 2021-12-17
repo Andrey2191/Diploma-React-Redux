@@ -1,7 +1,7 @@
-import { Form } from "../form/Form";
+import { Form } from "../../authorizationForm/Form";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slices/userSlice";
+import { setUser } from "../../../../redux/slices/userSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export const SignUpForm = () => {

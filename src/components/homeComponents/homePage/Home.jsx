@@ -1,19 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "../hooks/use-auth";
+import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
-import { removeUser } from "../redux/slices/userSlice";
+import { removeUser } from "../../../redux/slices/userSlice";
 
-import {
-  Categories,
-  SortPopup,
-  PizzaBlock,
-  PizzaLoadingBlock,
-} from "../components";
+import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 
-import { setCategory, setSortBy } from "../redux/actions/filter";
-import { fetchPizzas } from "../redux/actions/pizzas";
-import { addPizzaToCart } from "../redux/actions/cart";
+import { setCategory, setSortBy } from "../../../redux/actions/filter";
+import { fetchPizzas } from "../../../redux/actions/pizzas";
+import { addPizzaToCart } from "../../../redux/actions/cart";
 
 const categoryNames = [
   "Мясные",
@@ -32,6 +27,7 @@ function Home() {
   const dispatch = useDispatch();
   const items = useSelector(({ pizzas }) => pizzas.items);
   const cartItems = useSelector(({ cart }) => cart.items);
+  // const cart = useSelector(({ cartReducer }) => cartReducer);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
@@ -49,6 +45,9 @@ function Home() {
     dispatch(setSortBy(type));
   }, []);
 
+  // const handleAddPizzaToCart = (pizza) => {
+  //   dispatch(addPizzaToCart(pizza));
+  // };
   const handleAddPizzaToCart = (obj) => {
     dispatch({
       type: "ADD_PIZZA_CART",
@@ -78,6 +77,7 @@ function Home() {
                 onClickAddPizza={handleAddPizzaToCart}
                 key={obj.id}
                 addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
+                // addedCount={cart?.count?.[obj.id]}
                 {...obj}
               />
             ))

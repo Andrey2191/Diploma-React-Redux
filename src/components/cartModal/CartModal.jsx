@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Button from "../button/Button";
+import Button from "../common/button/Button";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
-import Input from "../input/Input";
+import Input from "../common/input/Input";
 
 export default function CartModal({
   active,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { LoginForm } from "../components/login/Login";
+import LoginForm from "../loginForm/Login";
 
 export default function Login() {
   return (
