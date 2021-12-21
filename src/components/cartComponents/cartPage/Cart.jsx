@@ -245,7 +245,7 @@ function Cart() {
                   <span>Вернуться назад</span>
                 </Link>
               </a>
-              <Link to="cart/confirm">
+              <Link to="/confirm">
                 <Button className="pay-btn">
                   <span>Оплатить сейчас</span>
                 </Button>

@@ -948,3 +948,11 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
+.has-error {
+  margin-bottom: 40px;
+  border: none;
+  border-bottom: 1px solid rgb(255, 0, 0);
+
+  width: 250px;
+}
