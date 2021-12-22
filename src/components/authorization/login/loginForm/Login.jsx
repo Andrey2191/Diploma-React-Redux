@@ -1,4 +1,4 @@
-import { Form } from "../../authorizationForm/Form";
+import { FormAuth } from "../../authorizationForm/Form";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../redux/slices/userSlice";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <Form title="Войти" handleClick={handleLogin} />
+      <FormAuth title="Войти" handleClick={handleLogin} />
     </div>
   );
 };

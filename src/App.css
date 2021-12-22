@@ -766,7 +766,7 @@ body {
 }
 
 .modal--input {
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
   border: none;
   border-bottom: 1px solid rgb(187, 187, 187);
 
@@ -861,6 +861,10 @@ body {
   text-align: center;
 }
 
+.login--page h1 {
+  margin-bottom: 70px;
+}
+
 .login--form {
   display: flex;
   flex-direction: column;
@@ -950,9 +954,26 @@ body {
 }
 
 .has-error {
-  margin-bottom: 40px;
+  /* margin-bottom: 6px; */
   border: none;
   border-bottom: 1px solid rgb(255, 0, 0);
 
   width: 250px;
+}
+
+.input-row {
+  margin-bottom: 40px;
+}
+
+.form-message {
+  font-size: 13px;
+  text-align: center;
+}
+
+.invalid {
+  color: rgb(255, 0, 0);
+}
+
+.valid {
+  color: rgb(4, 139, 4);
 }

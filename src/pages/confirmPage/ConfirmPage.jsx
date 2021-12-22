@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../../components/common/input/Input";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import Button from "../../components/common/button/Button";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
-import OrderInput from "../../components/common/formik/formik";
-import { Field, Formik, Form } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
+import Error from "../../components/common/error/Error";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -22,17 +22,13 @@ const validationSchema = yup.object().shape({
     .required("Must enter a address"),
   telephone: yup
     .number()
-    .min(1, "Must have a character")
-    .max(10, "Must be shorter than 15")
+    .min(0, "Must have a character")
+    .max(10, "Must be shorter than 10")
     .required("Must enter a telephone"),
 });
 
 const ConfirmPage = () => {
-  const [valueName, setValueName] = useState("");
-  const [valueAddress, setValueAddress] = useState("");
-  const [valueTelephone, setValueTelephone] = useState("");
-
-  const sendOrder = async () => {
+  const sendOrder = async (valueName, valueAddress, valueTelephone) => {
     try {
       const docRef = await addDoc(collection(db, "users"), {
         name: valueName,
@@ -42,8 +38,6 @@ const ConfirmPage = () => {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-
-    console.log(valueName, valueAddress, valueTelephone);
   };
 
   return (
@@ -52,90 +46,94 @@ const ConfirmPage = () => {
         <h1>Введите ваши данные</h1>
       </div>
       <div className={classNames("confirm--input")}>
-        {/* <OrderInput /> */}
         <Formik
           initialValues={{ name: "", address: "", telephone: "" }}
           validationSchema={validationSchema}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+            resetForm();
+            setSubmitting(false);
+            sendOrder(values.name, values.address, values.telephone);
+          }}
         >
-          {({ values, errors, touched, handleChange, handleBlur }) => (
-            <Form>
-              <label htmlFor="name">Name</label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                // className={classNames("modal--input", "input")}
-                className={classNames(
-                  touched.name && errors.name ? "has-error" : "modal--input",
-                  "input"
-                )}
-                // ДОделать ошибку инпута 12:28
-                placeholder="Ваше имя"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
-              />
-              <label htmlFor="address">address</label>
-              <Input
-                type="text"
-                name="address"
-                id="address"
-                className={classNames("modal--input", "input")}
-                placeholder="Введите ваш адрес"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.address}
-              />
-              <label htmlFor="telephone">telephone</label>
-              <Input
-                type="tel"
-                name="telephone"
-                id="telephone"
-                className={classNames("modal--input", "input")}
-                placeholder="Ваш номер телефона"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.telephone}
-              />
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <div className={classNames("input-row")}>
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className={classNames(
+                    touched.name && errors.name ? "has-error" : "modal--input",
+                    "input"
+                  )}
+                  placeholder="Ваше имя"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                <Error touched={touched.name} message={errors.name} />
+              </div>
+              <div className={classNames("input-row")}>
+                <Input
+                  type="text"
+                  name="address"
+                  id="address"
+                  className={classNames(
+                    touched.address && errors.address
+                      ? "has-error"
+                      : "modal--input",
+                    "input"
+                  )}
+                  placeholder="Введите ваш адрес"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.address}
+                />
+                <Error touched={touched.address} message={errors.address} />
+              </div>
+              <div className={classNames("input-row")}>
+                <Input
+                  type="text"
+                  name="telephone"
+                  id="telephone"
+                  className={classNames(
+                    touched.telephone && errors.telephone
+                      ? "has-error"
+                      : "modal--input",
+                    "input"
+                  )}
+                  placeholder="Ваш номер телефона"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.telephone}
+                />
+                <Error touched={touched.telephone} message={errors.telephone} />
+              </div>
 
-              <Button onClick={sendOrder} className={classNames("pay-btn")}>
+              <Button
+                type="submit"
+                className={classNames("pay-btn")}
+                disabled={isSubmitting}
+              >
                 <span>Подтвердить</span>
               </Button>
             </Form>
           )}
         </Formik>
-        {/* <Input
-          type="text"
-          name="name"
-          className={classNames("modal--input", "input")}
-          placeholder="Ваше имя"
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
-        />
-        <Input
-          className={classNames("modal--input", "input")}
-          type="text"
-          name="address"
-          placeholder="Введите ваш адрес"
-          value={valueAddress}
-          onChange={(e) => setValueAddress(e.target.value)}
-        />
-        <Input
-          type="text"
-          name="telephone"
-          className={classNames("modal--input", "input")}
-          placeholder="Ваш номер телефона"
-          value={valueTelephone}
-          onChange={(e) => setValueTelephone(e.target.value)}
-        /> */}
       </div>
       <div className={classNames("confirm--page-button")}>
         <Link to="/cart">
           <span>Вернуться назад</span>
         </Link>
-        {/* <Button onClick={sendOrder} className={classNames("pay-btn")}>
-          <span>Подтвердить</span>
-        </Button> */}
       </div>
     </div>
   );

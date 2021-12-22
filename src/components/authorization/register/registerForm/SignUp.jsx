@@ -1,4 +1,4 @@
-import { Form } from "../../authorizationForm/Form";
+import { FormAuth } from "../../authorizationForm/Form";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../redux/slices/userSlice";
@@ -27,7 +27,7 @@ export const SignUpForm = () => {
 
   return (
     <div>
-      <Form title="Register" handleClick={handleRegister} />
+      <FormAuth title="Зарегестрироваться" handleClick={handleRegister} />
     </div>
   );
 };
