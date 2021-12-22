@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../../components/common/input/Input";
 import { db } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc } from "firebase/firestore";
 import Button from "../../components/common/button/Button";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
@@ -35,6 +35,9 @@ const ConfirmPage = () => {
         address: valueAddress,
         telephone: valueTelephone,
       });
+
+      const result = await getDoc(docRef);
+      console.log({ result: result.data() });
     } catch (e) {
       console.error("Error adding document: ", e);
     }
