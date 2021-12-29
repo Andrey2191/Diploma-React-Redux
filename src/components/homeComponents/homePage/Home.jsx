@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { removeUser } from "../../../redux/slices/userSlice";
 
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
+// import { fetchPizzas } from "../../../redux/slices/pizzaSlice";
 
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
 import { fetchPizzas } from "../../../redux/actions/pizzas";
@@ -33,6 +34,10 @@ function Home() {
 
   const { isAuth, email } = useAuth();
 
+  // React.useEffect(() => {
+  //   dispatch(fetchPizzas(sortBy, category));
+  // }, [category, sortBy]);
+
   React.useEffect(() => {
     dispatch(fetchPizzas(sortBy, category));
   }, [category, sortBy]);
@@ -55,7 +60,7 @@ function Home() {
     });
   };
 
-  return isAuth ? (
+  return (
     <div className="container">
       <div className="content__top">
         <Categories
@@ -86,8 +91,8 @@ function Home() {
               .map((_, index) => <PizzaLoadingBlock key={index} />)}
       </div>
     </div>
-  ) : (
-    <Redirect to="/login" />
+    // ) : (
+    //   <Redirect to="/login" />
   );
 }
 

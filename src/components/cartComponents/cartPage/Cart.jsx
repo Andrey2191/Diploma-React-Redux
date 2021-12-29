@@ -103,7 +103,7 @@ function Cart() {
     });
   };
 
-  return isAuth ? (
+  return (
     <div className="container container--cart">
       {totalCount ? (
         <div className="cart">
@@ -277,21 +277,14 @@ function Cart() {
         onSubmit={openOrederModal}
       />
       <OrderModal
-        // valueName={valueName}
-        // valueAddress={valueAddress}
-        // valueTelephone={valueTelephone}
-        // setValueTelephone={setValueTelephone}
-        // setValueAddress={setValueAddress}
-        // setValueName={setValueName}
-        // sendOrder={sendOrder}
         activeOrder={orderModalActive}
         setActiveOrder={setOrderModalActive}
         onCancel={closeModal}
         orderNumber={randomOrder(1, 1000)}
       />
     </div>
-  ) : (
-    <Redirect to="/login" />
+    // ) : (
+    //   <Redirect to="/login" />
   );
 }
 
