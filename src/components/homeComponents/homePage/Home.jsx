@@ -60,7 +60,7 @@ function Home() {
     });
   };
 
-  return (
+  return isAuth ? (
     <div className="container">
       <div className="content__top">
         <Categories
@@ -91,8 +91,8 @@ function Home() {
               .map((_, index) => <PizzaLoadingBlock key={index} />)}
       </div>
     </div>
-    // ) : (
-    //   <Redirect to="/login" />
+  ) : (
+    <Redirect to="/login" />
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../../components/common/input/Input";
-import { db } from "../../firebase";
+// import { db } from "../../firebase";
 import { collection, addDoc, getDoc } from "firebase/firestore";
 import Button from "../../components/common/button/Button";
 import classNames from "classnames";
@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Error from "../../components/common/error/Error";
+import { getDatabase, ref, set } from "firebase/database";
+import { db } from "../../firebase";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -28,19 +30,28 @@ const validationSchema = yup.object().shape({
 });
 
 const ConfirmPage = () => {
-  const sendOrder = async (valueName, valueAddress, valueTelephone) => {
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-        name: valueName,
-        address: valueAddress,
-        telephone: valueTelephone,
-      });
+  // const sendOrder = async (valueName, valueAddress, valueTelephone) => {
+  //   try {
+  //     const docRef = await addDoc(collection(db, "users"), {
+  //       name: valueName,
+  //       address: valueAddress,
+  //       telephone: valueTelephone,
+  //     });
 
-      const result = await getDoc(docRef);
-      console.log({ result: result.data() });
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+  //     const result = await getDoc(docRef);
+  //     console.log({ result: result.data() });
+  //   } catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+  // };
+
+  const sendOrder = (valueName, valueAddress, valueTelephone) => {
+    // const db = getDatabase();
+    set(ref(db, "usersOrder"), {
+      name: valueName,
+      address: valueAddress,
+      telephone: valueTelephone,
+    });
   };
 
   return (

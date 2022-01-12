@@ -10,13 +10,20 @@ import {
 import { db } from "../../firebase";
 import { addDoc } from "firebase/firestore";
 
+const initialState = {
+  orders: [],
+  status: null,
+  error: null,
+};
+
 export const fetchOrder = createAsyncThunk(
-  "order/fetchOrder",
+  "orders/fetchOrder",
   async function () {
     const q = query(collection(db, "users"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       console.log(doc.id, " => ", doc.data());
+      console.log(doc);
     });
     const data = await querySnapshot.json();
 
@@ -25,12 +32,8 @@ export const fetchOrder = createAsyncThunk(
 );
 
 const orderSlice = createSlice({
-  name: "order",
-  initialState: {
-    orders: [],
-    status: null,
-    error: null,
-  },
+  name: "orders",
+  initialState,
   reducers: {},
   extraReducers: {
     [fetchOrder.pending]: (state) => {
@@ -44,3 +47,5 @@ const orderSlice = createSlice({
     [fetchOrder.rejected]: (state, action) => {},
   },
 });
+
+export default orderSlice.reducer;

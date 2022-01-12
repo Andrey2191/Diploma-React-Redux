@@ -11,6 +11,7 @@ import { db } from "../../firebase";
 import { addDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { fetchOrder } from "../../redux/slices/orderSlice";
+import OrderList from "./OrderList";
 
 // export default function OrderHistory() {
 //   const getOrder = async () => {
@@ -41,6 +42,7 @@ export default function OrderHistory() {
   return (
     <div className="">
       Ваши заказы
+      <OrderList />
       <button>+</button>
     </div>
   );

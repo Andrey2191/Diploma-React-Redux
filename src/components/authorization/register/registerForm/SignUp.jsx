@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../redux/slices/userSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { register } from "../../../../redux/slices/registerSlice";
 
 export const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const SignUpForm = () => {
     //     push("/");
     //   })
     //   .catch(console.error);
+    dispatch(register({ email, password }));
   };
 
   return (

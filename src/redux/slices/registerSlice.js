@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import thunk from "redux-thunk";
 
 const initialState = {
@@ -10,36 +10,13 @@ const initialState = {
   id: null,
 };
 
-// const userSlice = createSlice({
-//   name: "user",
-//   initialState,
-//   reducers: {
-//     setUser(state, action) {
-//       state.email = action.payload.email;
-//       state.token = action.payload.token;
-//       state.id = action.payload.id;
-//     },
-//     removeUser(state) {
-//       state.email = null;
-//       state.token = null;
-//       state.id = null;
-//     },
-//   },
-// });
-
-// export const { setUser, removeUser } = userSlice.actions;
-
-// export default userSlice.reducer;
-
-// const provider = new firebase.auth.GoogleAuthProvider();
-
-export const login = createAsyncThunk(
+export const register = createAsyncThunk(
   "login",
   async ({ email, password }, thunkAPI) => {
     const auth = getAuth();
     const { push } = useHistory();
 
-    signInWithEmailAndPassword(auth, email, password).then(({ user }) => {
+    createUserWithEmailAndPassword(auth, email, password).then(({ user }) => {
       console.log(user);
       push("/");
     });
@@ -47,7 +24,7 @@ export const login = createAsyncThunk(
 );
 
 export default createSlice({
-  name: "user",
+  name: "register",
   initialState,
   reducers: {
     setUser(state, action) {
@@ -57,12 +34,12 @@ export default createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
+    builder.addCase(register.fulfilled, (state, action) => {
       state.email = action.payload.email;
       state.token = action.payload.token;
       state.id = action.payload.id;
     });
-    builder.addCase(login.rejected, (state, action) => {
+    builder.addCase(register.rejected, (state, action) => {
       state.error = action.error;
     });
     // builder.addCase(logout.fulfilled, (state) => {
@@ -75,7 +52,3 @@ export default createSlice({
     // });
   },
 });
-
-// export const { setUser } = userSlice.actions;
-
-// export default userSlice.reducer;
