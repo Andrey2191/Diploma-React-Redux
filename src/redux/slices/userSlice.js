@@ -41,7 +41,8 @@ export const login = createAsyncThunk(
       .then(({ user }) => {
         console.log(user);
       })
-      .catch(() => alert("Пользователь не найден"));
+
+      .catch((error) => thunkAPI.rejectWithValue({ error: error.message }));
   }
 );
 
