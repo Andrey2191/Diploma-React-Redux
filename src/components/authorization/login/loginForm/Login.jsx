@@ -31,7 +31,6 @@ const LoginForm = () => {
     //   .catch(() => alert("Пользователь не найден!"));
 
     dispatch(login({ email, password }));
-    push("/");
   };
 
   return (
