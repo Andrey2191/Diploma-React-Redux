@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import thunk from "redux-thunk";
 
 const initialState = {
@@ -40,6 +44,19 @@ export const login = createAsyncThunk(
     const { push } = useHistory();
 
     signInWithEmailAndPassword(auth, email, password).then(({ user }) => {
+      console.log(user);
+      push("/");
+    });
+  }
+);
+
+export const register = createAsyncThunk(
+  "login",
+  async ({ email, password }, thunkAPI) => {
+    const auth = getAuth();
+    const { push } = useHistory();
+
+    createUserWithEmailAndPassword(auth, email, password).then(({ user }) => {
       console.log(user);
       push("/");
     });
