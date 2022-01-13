@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const register = createAsyncThunk(
-  "login",
+  "register",
   async ({ email, password }, thunkAPI) => {
     const auth = getAuth();
 
