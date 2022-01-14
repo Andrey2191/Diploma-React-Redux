@@ -1,52 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-const initialState = {
-  email: null,
-  token: null,
-  id: null,
-};
-
-// const userSlice = createSlice({
-//   name: "user",
-//   initialState,
-//   reducers: {
-//     setUser(state, action) {
-//       state.email = action.payload.email;
-//       state.token = action.payload.token;
-//       state.id = action.payload.id;
-//     },
-//     removeUser(state) {
-//       state.email = null;
-//       state.token = null;
-//       state.id = null;
-//     },
-//   },
-// });
-
-// export const { setUser, removeUser } = userSlice.actions;
-
-// export default userSlice.reducer;
-
-// const provider = new firebase.auth.GoogleAuthProvider();
+const initialState = { email: null, token: null, id: null, error: null };
 
 export const login = createAsyncThunk(
   "login",
-  async ({ email, password }, thunkAPI) => {
-    const auth = getAuth();
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        console.log(user);
-      })
-
-      .catch((error) => thunkAPI.rejectWithValue({ error: error.message }));
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const auth = getAuth();
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      return user;
+    } catch (error) {
+      return rejectWithValue({ error: error.message });
+    }
   }
 );
 
-export default createSlice({
+export const logout = createAsyncThunk(
+  "logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+    } catch (error) {
+      return rejectWithValue({ error: error.message });
+    }
+  }
+);
+
+const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -59,23 +41,20 @@ export default createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.email = action.payload.email;
-      state.token = action.payload.token;
-      state.id = action.payload.id;
+      state.token = action.payload.accessToken;
+      state.id = action.payload.uid;
+      state.error = null;
     });
-    builder.addCase(login.rejected, (state, action) => {
-      state.error = action.error;
-    });
-    // builder.addCase(logout.fulfilled, (state) => {
-    //   state.email = null;
-    //   state.token = null;
-    //   state.id = null;
-    // });
-    // builder.addCase(logout.rejected, (state, action) => {
-    //   state.error = action.error;
-    // });
+    builder.addCase(logout.fulfilled, () => initialState);
+    builder.addMatcher(
+      (action) => action.type.endsWith("/rejected"),
+      (state, action) => {
+        state.error = action.payload.error;
+      }
+    );
   },
 });
 
 // export const { setUser } = userSlice.actions;
 
-// export default userSlice.reducer;
+export default userSlice.reducer;

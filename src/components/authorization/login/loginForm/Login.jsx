@@ -1,36 +1,19 @@
-import { FormAuth } from "../../authorizationForm/Form";
 import { useDispatch } from "react-redux";
-import { login, setUser } from "../../../../redux/slices/userSlice";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useHistory } from "react-router-dom";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const initialState = {
-  email: null,
-  token: null,
-  id: null,
-};
+import { FormAuth } from "../../authorizationForm/Form";
+import { login } from "../../../../redux/slices/userSlice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { push } = useHistory();
+  const history = useHistory();
 
-  const handleLogin = (email, password) => {
-    // const auth = getAuth();
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then(({ user }) => {
-    //     dispatch(
-    //       setUser({
-    //         email: user.email,
-    //         id: user.uid,
-    //         token: user.accessToken,
-    //       })
-    //     );
-    //     push("/");
-    //   })
-    //   .catch(() => alert("Пользователь не найден!"));
-
-    dispatch(login({ email, password }));
+  const handleLogin = async (email, password) => {
+    const resultAction = await dispatch(login({ email, password }));
+    if (login.fulfilled.match(resultAction)) {
+      history.push("/");
+    } else {
+      alert("Пользователь не найден!");
+    }
   };
 
   return (

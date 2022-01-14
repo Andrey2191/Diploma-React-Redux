@@ -10,6 +10,7 @@ import * as yup from "yup";
 import Error from "../../components/common/error/Error";
 import { getDatabase, ref, set } from "firebase/database";
 import { db } from "../../firebase";
+import { useAuth } from "../../components/authorization/authorizationHook/use-auth";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -44,13 +45,14 @@ const ConfirmPage = () => {
   //     console.error("Error adding document: ", e);
   //   }
   // };
+  const { isAuth, email } = useAuth();
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
-    // const db = getDatabase();
-    set(ref(db, "usersOrder"), {
+    set(ref(db, "users"), {
       name: valueName,
       address: valueAddress,
       telephone: valueTelephone,
+      userEmail: email,
     });
   };
 

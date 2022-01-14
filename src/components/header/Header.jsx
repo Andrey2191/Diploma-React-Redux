@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { removeUser } from "../../redux/slices/userSlice";
+import { logout, removeUser } from "../../redux/slices/userSlice";
 import { useAuth } from "../authorization/authorizationHook/use-auth";
 import { useDispatch } from "react-redux";
 import logoSvg from "../../assets/img/pizza-logo.svg";
@@ -39,10 +39,7 @@ function Header() {
           </Link>
           <div className="logout">
             <span>{email}</span>
-            <button
-              className="btn--logout"
-              // onClick={() => dispatch(removeUser())}
-            >
+            <button className="btn--logout" onClick={() => dispatch(logout())}>
               Выйти
             </button>
           </div>
