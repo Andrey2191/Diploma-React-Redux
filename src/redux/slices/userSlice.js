@@ -23,6 +23,7 @@ export const logout = createAsyncThunk(
       const auth = getAuth();
       await signOut(auth);
     } catch (error) {
+      console.log(error);
       return rejectWithValue({ error: error.message });
     }
   }
@@ -49,6 +50,7 @@ const userSlice = createSlice({
     builder.addMatcher(
       (action) => action.type.endsWith("/rejected"),
       (state, action) => {
+        console.log(action);
         state.error = action.payload.error;
       }
     );

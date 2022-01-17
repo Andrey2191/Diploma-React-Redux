@@ -8,7 +8,8 @@ import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 // import { fetchPizzas } from "../../../redux/slices/pizzaSlice";
 
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
-import { fetchPizzas } from "../../../redux/actions/pizzas";
+// import { fetchPizzas } from "../../../redux/actions/pizzas";
+import { fetchPizzas } from "../../../redux/slices/pizzaSlice";
 import { addPizzaToCart } from "../../../redux/actions/cart";
 
 const categoryNames = [
@@ -31,6 +32,9 @@ function Home() {
   // const cart = useSelector(({ cartReducer }) => cartReducer);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
+
+  const pizzas = useSelector((state) => state.pizzas.pizzas);
+  console.log(pizzas);
 
   const { isAuth, email } = useAuth();
 
@@ -77,7 +81,7 @@ function Home() {
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoaded
-          ? items.map((obj) => (
+          ? pizzas.map((obj) => (
               <PizzaBlock
                 onClickAddPizza={handleAddPizzaToCart}
                 key={obj.id}

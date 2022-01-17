@@ -15,16 +15,6 @@ export const fetchPizzas = (sortBy, category) => (dispatch) => {
     payload: false,
   });
 
-  //   axios
-  //     .get(
-  //       `http://localhost:3333/pizzas?${
-  //         category !== null ? `category=${category}` : ""
-  //       }&_sort=${sortBy}&_order=desc`
-  //     )
-  //     .then(({ data }) => {
-  //       dispatch(setPizzas(data));
-  //     });
-  // };
   api
     .get(
       `pizzas?${

@@ -11,6 +11,7 @@ import Error from "../../components/common/error/Error";
 import { getDatabase, ref, set } from "firebase/database";
 import { db } from "../../firebase";
 import { useAuth } from "../../components/authorization/authorizationHook/use-auth";
+import { uid } from "uid";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -48,7 +49,8 @@ const ConfirmPage = () => {
   const { isAuth, email } = useAuth();
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
-    set(ref(db, "users"), {
+    const uuid = uid();
+    set(ref(db, `/${uuid} order`), {
       name: valueName,
       address: valueAddress,
       telephone: valueTelephone,

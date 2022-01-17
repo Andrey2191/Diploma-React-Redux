@@ -1,26 +1,50 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 export const fetchPizzas = createAsyncThunk(
   "pizzas/fetchPizzas",
-  async function (sortBy, category) {
-    const response = await fetch(
-      `http://localhost:3333/pizzas?${
-        category !== null ? `category=${category}` : ""
-      }&_sort=${sortBy}&_order=desc`
-    );
+  async function (_, { rejectWithValue }) {
+    try {
+      const items = [];
+      const q = query(collection(db, "pizzas"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const item = doc.data();
 
-    const data = await response.json();
-
-    return data;
+        console.log(doc.id, " => ", doc.data());
+        items.push(item);
+      });
+      return items;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue({ error: error.message });
+    }
   }
 );
+// export const fetchPizzas = createAsyncThunk(
+//   "pizzas/fetchPizzas",
+//   async function () {
+//     const q = query(collection(db, "pizzas"));
+//     const querySnapshot = await getDocs(q);
+//     querySnapshot.forEach((doc) => {
+//       console.log(doc.id, " => ", doc.data());
+//     });
+//   }
+// );
 
 const pizzaSlice = createSlice({
   name: "pizzas",
   initialState: {
     pizzas: [],
     status: null,
-
     error: null,
   },
   reducers: {},
@@ -32,7 +56,10 @@ const pizzaSlice = createSlice({
     [fetchPizzas.fulfilled]: (state, action) => {
       state.status = "resolved";
       state.pizzas = action.payload;
+      console.log(action);
     },
     [fetchPizzas.rejected]: (state, action) => {},
   },
 });
+
+export default pizzaSlice.reducer;
