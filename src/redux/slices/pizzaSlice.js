@@ -19,7 +19,6 @@ export const fetchPizzas = createAsyncThunk(
       querySnapshot.forEach((doc) => {
         const item = doc.data();
 
-        console.log(doc.id, " => ", doc.data());
         items.push(item);
       });
       return items;
@@ -46,6 +45,7 @@ const pizzaSlice = createSlice({
     pizzas: [],
     status: null,
     error: null,
+    isLoaded: null,
   },
   reducers: {},
   extraReducers: {
@@ -56,7 +56,7 @@ const pizzaSlice = createSlice({
     [fetchPizzas.fulfilled]: (state, action) => {
       state.status = "resolved";
       state.pizzas = action.payload;
-      console.log(action);
+      state.isLoaded = true;
     },
     [fetchPizzas.rejected]: (state, action) => {},
   },

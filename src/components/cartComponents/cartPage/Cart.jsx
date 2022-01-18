@@ -13,7 +13,8 @@ import {
 } from "../../../redux/actions/cart";
 import CartModal from "../../cartModal/CartModal";
 import OrderModal from "../../cartModal/OrderModal";
-import { fetchSauces } from "../../../redux/actions/sauces";
+// import { fetchSauces } from "../../../redux/actions/sauces";
+import { fetchSauces } from "../../../redux/slices/saucesSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
 import { addSaucesToCart } from "../../../redux/actions/cart";
@@ -26,32 +27,13 @@ function Cart() {
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
   const [modalActive, setModalActive] = useState(false);
   const [orderModalActive, setOrderModalActive] = useState(false);
-  const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
+  // const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
+  const sauces = useSelector((state) => state.sauces.sauces);
   const { isAuth, email } = useAuth();
 
-  // const [valueName, setValueName] = useState("");
-  // const [valueAddress, setValueAddress] = useState("");
-  // const [valueTelephone, setValueTelephone] = useState("");
-
-  // const sendOrder = async () => {
-  //   try {
-  //     const docRef = await addDoc(collection(db, "users"), {
-  //       name: valueName,
-  //       address: valueAddress,
-  //       telephone: valueTelephone,
-  //     });
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-
-  //   console.log(valueName, valueAddress, valueTelephone);
-  // };
-
-  // console.log(setValueName);
-
   React.useEffect(() => {
-    dispatch(fetchSauces);
-  }, []);
+    dispatch(fetchSauces());
+  }, [dispatch]);
 
   const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
@@ -200,8 +182,8 @@ function Cart() {
           </div>
           <span>Дополнительно</span>
           <div className="cart--sauces">
-            {saucesItems &&
-              saucesItems.map((obj) => (
+            {sauces &&
+              sauces.map((obj) => (
                 <SaucesCard
                   key={obj.id}
                   name={obj.name}

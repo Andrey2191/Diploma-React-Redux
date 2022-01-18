@@ -9,6 +9,7 @@ import sauces from "./sauces";
 import userReducer from "../slices/userSlice";
 import orderReducer from "../slices/orderSlice";
 import pizzaReducer from "../slices/pizzaSlice";
+import saucesReducer from "../slices/saucesSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,7 +21,7 @@ const rootReducer = combineReducers({
   filters,
   pizzas: pizzaReducer,
   cart,
-  sauces,
+  sauces: saucesReducer,
   user: userReducer,
   orders: orderReducer,
 });
