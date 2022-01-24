@@ -18,16 +18,21 @@ const initialState = {
 
 export const fetchOrder = createAsyncThunk(
   "orders/fetchOrder",
-  async function () {
-    const q = query(collection(db, "users"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-      console.log(doc);
-    });
-    const data = await querySnapshot.json();
-
-    return data;
+  async function (_, { rejectWithValue }) {
+    try {
+      const orders = [];
+      const q = query(collection(db, "usersOrder"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const order = doc.data();
+        // console.log(doc.id, " => ", doc.data());
+        orders.push(order);
+      });
+      return orders;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue({ error: error.message });
+    }
   }
 );
 

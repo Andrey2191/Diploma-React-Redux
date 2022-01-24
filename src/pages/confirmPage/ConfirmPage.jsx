@@ -49,14 +49,23 @@ const ConfirmPage = () => {
   const { isAuth, email } = useAuth();
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
-    const uuid = uid();
-    set(ref(db, `/${uuid} order`), {
+    const docRef = addDoc(collection(db, "usersOrder"), {
       name: valueName,
       address: valueAddress,
       telephone: valueTelephone,
-      userEmail: email,
+      email: email,
     });
   };
+
+  // const sendOrder = (valueName, valueAddress, valueTelephone) => {
+  //   const uuid = uid();
+  //   set(ref(db, `/${uuid} order`), {
+  //     name: valueName,
+  //     address: valueAddress,
+  //     telephone: valueTelephone,
+  //     userEmail: email,
+  //   });
+  // };
 
   return (
     <div className={classNames("confirm--page")}>

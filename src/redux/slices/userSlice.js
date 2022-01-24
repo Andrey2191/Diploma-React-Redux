@@ -48,11 +48,11 @@ const userSlice = createSlice({
     });
     builder.addCase(logout.fulfilled, () => initialState);
     builder.addMatcher(
-      (action) => action.type.endsWith("/rejected"),
-      (state, action) => {
-        console.log(action);
-        state.error = action.payload.error;
-      }
+      (action) => action.type.endsWith("/rejected")
+      // (state, action) => {
+      //   console.log(action);
+      //   state.error = action.payload.error;
+      // }
     );
   },
 });

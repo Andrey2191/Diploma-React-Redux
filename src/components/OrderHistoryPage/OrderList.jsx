@@ -1,14 +1,19 @@
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { fetchOrder } from "../../redux/slices/orderSlice";
+import { useEffect } from "react";
+import classNames from "classnames";
 
-const OrderList = () => {
-  const orders = useSelector((state) => state.orders.orders);
-
+const OrderList = (userName, userEmail, userAddress, userTelephone) => {
   return (
-    <ul>
-      {orders.map((order) => {
-        <li>{order}</li>;
-      })}
-    </ul>
+    <div className={classNames("orderCard")}>
+      <ul>
+        <li>{userName}</li>
+        <li>{userEmail}</li>
+        <li>{userAddress}</li>
+        <li>{userTelephone}</li>
+      </ul>
+    </div>
   );
 };
 

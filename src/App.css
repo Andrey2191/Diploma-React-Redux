@@ -977,3 +977,9 @@ body {
 .valid {
   color: rgb(4, 139, 4);
 }
+
+.orderCard {
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+}
