@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import useEffect from "react";
-
 import cartEmptyImage from "../../../assets/img/empty-cart.png";
 import { CartItem, Button, SaucesCard } from "../../index";
 import {
@@ -11,23 +9,13 @@ import {
   plusCartItem,
   minusCartItem,
 } from "../../../redux/actions/cart";
-import CartModal from "../../cartModal/CartModal";
-import OrderModal from "../../cartModal/OrderModal";
-// import { fetchSauces } from "../../../redux/actions/sauces";
-import { fetchSauces } from "../../../redux/slices/saucesSlice";
+import { fetchSauces } from "../../saucesComponents/saucesSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
-import { addSaucesToCart } from "../../../redux/actions/cart";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../firebase";
-import { collection, addDoc } from "firebase/firestore";
 
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
-  const [modalActive, setModalActive] = useState(false);
-  const [orderModalActive, setOrderModalActive] = useState(false);
-  // const saucesItems = useSelector(({ sauces }) => sauces.saucesItems);
   const sauces = useSelector((state) => state.sauces.sauces);
   const { isAuth, email } = useAuth();
 
@@ -59,21 +47,6 @@ function Cart() {
     dispatch(minusCartItem(id));
   };
 
-  const onClickOrder = () => {
-    // console.log("ВАШ ЗАКАЗ", items);
-    setModalActive(true);
-  };
-
-  const closeModal = () => {
-    setModalActive(false);
-    setOrderModalActive(false);
-  };
-
-  const openOrederModal = () => {
-    setModalActive(false);
-    setOrderModalActive(true);
-  };
-
   const randomOrder = (min, max) => {
     return Math.floor(Math.random() * (max - min));
   };
@@ -85,7 +58,7 @@ function Cart() {
     });
   };
 
-  return (
+  return isAuth ? (
     <div className="container container--cart">
       {totalCount ? (
         <div className="cart">
@@ -251,22 +224,9 @@ function Cart() {
           </Link>
         </div>
       )}
-
-      <CartModal
-        active={modalActive}
-        setActive={setModalActive}
-        onCancel={closeModal}
-        onSubmit={openOrederModal}
-      />
-      <OrderModal
-        activeOrder={orderModalActive}
-        setActiveOrder={setOrderModalActive}
-        onCancel={closeModal}
-        orderNumber={randomOrder(1, 1000)}
-      />
     </div>
-    // ) : (
-    //   <Redirect to="/login" />
+  ) : (
+    <Redirect to="/login" />
   );
 }
 

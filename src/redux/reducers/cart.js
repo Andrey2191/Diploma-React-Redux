@@ -1,6 +1,3 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { addPizzaToCart } from "../actions/cart";
-
 const initialState = {
   items: {},
   count: {},

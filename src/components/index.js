@@ -1,8 +1,10 @@
-export { default as Header } from "./header/Header";
-export { default as Categories } from "./homeComponents/sortPizza/sortCategories/Categories";
+export { default as Header } from "./common/header/Header";
+export { default as Categories } from "./pizzaComponents/sortPizza/sortCategories/Categories";
 export { default as Button } from "./common/button/Button";
-export { default as SortPopup } from "./homeComponents/sortPizza/sortPopup/SortPopup";
-export { default as PizzaBlock } from "./homeComponents/pizzaCard/PizaCard";
-export { default as PizzaLoadingBlock } from "./homeComponents/pizzaCard/pizzaLoader";
+export { default as SortPopup } from "./pizzaComponents/sortPizza/sortPopup/SortPopup";
+export { default as PizzaBlock } from "./pizzaComponents/pizzaCard/PizaCard";
+export { default as PizzaLoadingBlock } from "./pizzaComponents/pizzaCard/pizzaLoader";
 export { default as CartItem } from "./cartComponents/cartItem/CartItem";
-export { default as SaucesCard } from "./cartComponents/saucesCard/saucesCard";
+export { default as SaucesCard } from "./saucesComponents/saucesCard";
+export { default as Home } from "./homeComponents/homePage/Home";
+export { default as Cart } from "./cartComponents/cartPage/Cart";

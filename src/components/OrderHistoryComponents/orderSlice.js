@@ -25,7 +25,6 @@ export const fetchOrder = createAsyncThunk(
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         const order = doc.data();
-        // console.log(doc.id, " => ", doc.data());
         orders.push(order);
       });
       return orders;

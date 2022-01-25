@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
-import { db } from "../../firebase";
+import { collection, getDocs, query } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 export const fetchPizzas = createAsyncThunk(
   "pizzas/fetchPizzas",
@@ -28,16 +21,6 @@ export const fetchPizzas = createAsyncThunk(
     }
   }
 );
-// export const fetchPizzas = createAsyncThunk(
-//   "pizzas/fetchPizzas",
-//   async function () {
-//     const q = query(collection(db, "pizzas"));
-//     const querySnapshot = await getDocs(q);
-//     querySnapshot.forEach((doc) => {
-//       console.log(doc.id, " => ", doc.data());
-//     });
-//   }
-// );
 
 const pizzaSlice = createSlice({
   name: "pizzas",

@@ -1,17 +1,16 @@
 import React from "react";
-import Input from "../../components/common/input/Input";
-// import { db } from "../../firebase";
-import { collection, addDoc, getDoc } from "firebase/firestore";
-import Button from "../../components/common/button/Button";
+import Input from "../common/input/Input";
+import { collection, addDoc } from "firebase/firestore";
+import Button from "../common/button/Button";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
-import Error from "../../components/common/error/Error";
-import { getDatabase, ref, set } from "firebase/database";
+import Error from "../common/error/Error";
 import { db } from "../../firebase";
-import { useAuth } from "../../components/authorization/authorizationHook/use-auth";
-import { uid } from "uid";
+import { useAuth } from "../authorization/authorizationHook/use-auth";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -32,21 +31,11 @@ const validationSchema = yup.object().shape({
 });
 
 const ConfirmPage = () => {
-  // const sendOrder = async (valueName, valueAddress, valueTelephone) => {
-  //   try {
-  //     const docRef = await addDoc(collection(db, "users"), {
-  //       name: valueName,
-  //       address: valueAddress,
-  //       telephone: valueTelephone,
-  //     });
-
-  //     const result = await getDoc(docRef);
-  //     console.log({ result: result.data() });
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // };
   const { isAuth, email } = useAuth();
+  const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
+  const addedPizzas = Object.keys(items).map((key) => {
+    return items[key].items[0];
+  });
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
     const docRef = addDoc(collection(db, "usersOrder"), {
@@ -54,20 +43,12 @@ const ConfirmPage = () => {
       address: valueAddress,
       telephone: valueTelephone,
       email: email,
+      cost: totalPrice,
+      pizzas: addedPizzas,
     });
   };
 
-  // const sendOrder = (valueName, valueAddress, valueTelephone) => {
-  //   const uuid = uid();
-  //   set(ref(db, `/${uuid} order`), {
-  //     name: valueName,
-  //     address: valueAddress,
-  //     telephone: valueTelephone,
-  //     userEmail: email,
-  //   });
-  // };
-
-  return (
+  return isAuth ? (
     <div className={classNames("confirm--page")}>
       <div className={classNames("confirm--header")}>
         <h1>Введите ваши данные</h1>
@@ -163,6 +144,8 @@ const ConfirmPage = () => {
         </Link>
       </div>
     </div>
+  ) : (
+    <Redirect to="/login" />
   );
 };
 

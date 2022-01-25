@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { FormAuth } from "../../authorizationForm/Form";
-import { login } from "../../../../redux/slices/userSlice";
+import { login } from "../../slice/userSlice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

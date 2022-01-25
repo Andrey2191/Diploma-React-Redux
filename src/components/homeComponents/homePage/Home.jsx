@@ -2,11 +2,9 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
-import { removeUser } from "../../../redux/slices/userSlice";
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
-import { fetchPizzas } from "../../../redux/slices/pizzaSlice";
-import { addPizzaToCart } from "../../../redux/actions/cart";
+import { fetchPizzas } from "../../pizzaComponents/pizzaSlice/pizzaSlice";
 
 const categoryNames = [
   "Мясные",
@@ -23,13 +21,12 @@ const sortIems = [
 
 function Home() {
   const dispatch = useDispatch();
-  const items = useSelector(({ pizzas }) => pizzas.items);
   const cartItems = useSelector(({ cart }) => cart.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
   const pizzas = useSelector((state) => state.pizzas.pizzas);
-  const { isAuth, email } = useAuth();
+  const { isAuth } = useAuth();
 
   React.useEffect(() => {
     dispatch(fetchPizzas(sortBy, category));

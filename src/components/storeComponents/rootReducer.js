@@ -1,15 +1,12 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
-import filters from "./filters";
-import pizzas from "./pizzas";
-import cart from "./cart";
-import sauces from "./sauces";
-import userReducer from "../slices/userSlice";
-import orderReducer from "../slices/orderSlice";
-import pizzaReducer from "../slices/pizzaSlice";
-import saucesReducer from "../slices/saucesSlice";
+import filters from "../../redux/reducers/filters";
+import cart from "../../redux/reducers/cart";
+import userReducer from "../authorization/slice/userSlice";
+import orderReducer from "../OrderHistoryComponents/orderSlice";
+import pizzaReducer from "../pizzaComponents/pizzaSlice/pizzaSlice";
+import saucesReducer from "../saucesComponents/saucesSlice";
 
 const persistConfig = {
   key: "root",

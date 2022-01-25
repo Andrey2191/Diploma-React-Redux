@@ -1,20 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { logout, removeUser } from "../../redux/slices/userSlice";
-import { useAuth } from "../authorization/authorizationHook/use-auth";
+import { logout, removeUser } from "../../authorization/slice/userSlice";
+import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { useDispatch } from "react-redux";
-import logoSvg from "../../assets/img/pizza-logo.svg";
-import Button from "../common/button/Button";
-import OrderPage from "../OrderHistoryPage/OrderPage";
-import cart from "../../assets/img/cart.svg";
+import logoSvg from "../../../assets/img/pizza-logo.svg";
+import Button from "../button/Button";
+import cart from "../../../assets/img/cart.svg";
 
 function Header() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
   const { isAuth, email } = useAuth();
 
-  return (
+  return isAuth ? (
     <div className="header">
       <div className="container">
         <Link to="/">
@@ -47,8 +46,8 @@ function Header() {
         </div>
       </div>
     </div>
-    // ) : (
-    //   ""
+  ) : (
+    ""
   );
 }
 
