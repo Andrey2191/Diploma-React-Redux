@@ -11,7 +11,6 @@ export const fetchSauces = createAsyncThunk(
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         const item = doc.data();
-        console.log(doc.id, " => ", doc.data());
         items.push(item);
       });
       return items;
@@ -38,7 +37,6 @@ const saucesSlice = createSlice({
     [fetchSauces.fulfilled]: (state, action) => {
       state.status = "resolved";
       state.sauces = action.payload;
-      console.log(action);
     },
     [fetchSauces.rejected]: (state, action) => {},
   },

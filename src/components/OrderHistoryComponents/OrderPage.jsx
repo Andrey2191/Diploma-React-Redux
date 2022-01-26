@@ -23,14 +23,13 @@ export default function OrderPage() {
 
       {orders.map((order) => {
         if (order.email === email) {
-          console.log(Object.values(order));
           return (
             <div className={classNames("orderCard")}>
               <div className={classNames("order-title")}>
                 Ваш email: {order.email}
               </div>
               <div className={classNames("order-title")}>
-                Заказ на имя {order.name}
+                Заказ на имя: {order.name}
               </div>
               <div className={classNames("order-title")}>
                 Номер телефона: {order.telephone}
@@ -42,19 +41,21 @@ export default function OrderPage() {
                 Стоимость заказа: {order.cost} руб.
               </div>
 
-              {order.pizzas.map((pizza) => {
-                return (
-                  <OrderItem
-                    key={pizza.id}
-                    id={pizza.id}
-                    imageUrl={pizza.imageUrl}
-                    name={pizza.name}
-                    type={pizza.type}
-                    size={pizza.size}
-                    totalPrice={pizza.price}
-                  />
-                );
-              })}
+              <div className={classNames("order-body")}>
+                {order.pizzas.map((pizza) => {
+                  return (
+                    <OrderItem
+                      key={pizza.id}
+                      id={pizza.id}
+                      imageUrl={pizza.imageUrl}
+                      name={pizza.name}
+                      type={pizza.type}
+                      size={pizza.size}
+                      totalPrice={pizza.price}
+                    />
+                  );
+                })}
+              </div>
             </div>
           );
         }

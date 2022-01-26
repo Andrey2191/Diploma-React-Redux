@@ -11,7 +11,7 @@ import saucesReducer from "../saucesComponents/saucesSlice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["filters", "pizzas", "cart", "sauces", "user"],
+  whitelist: ["user"],
 };
 
 const rootReducer = combineReducers({

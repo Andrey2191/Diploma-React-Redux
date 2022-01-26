@@ -45,6 +45,8 @@ const ConfirmPage = () => {
       email: email,
       cost: totalPrice,
       pizzas: addedPizzas,
+
+      count: totalCount,
     });
   };
 
