@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import logoSvg from "../../../assets/img/pizza-logo.svg";
 import Button from "../button/Button";
 import cart from "../../../assets/img/cart.svg";
+import classNames from "classnames";
 
 function Header() {
   const dispatch = useDispatch();
@@ -14,10 +15,10 @@ function Header() {
   const { isAuth, email } = useAuth();
 
   return isAuth ? (
-    <div className="header">
-      <div className="container">
+    <div className={classNames("header")}>
+      <div className={classNames("container")}>
         <Link to="/">
-          <div className="header__logo">
+          <div className={classNames("header__logo")}>
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>
@@ -26,19 +27,22 @@ function Header() {
           </div>
         </Link>
 
-        <div className="header__cart">
+        <div className={classNames("header__cart")}>
           <Link to="/cart">
-            <Button className="button--cart">
+            <Button className={classNames("button--cart")}>
               <span>{totalPrice} руб.</span>
-              <div className="button__delimiter"></div>
+              <div className={classNames("button__delimiter")}></div>
               <img width={20} src={cart} />
 
               <span>{totalCount}</span>
             </Button>
           </Link>
-          <div className="logout">
+          <div className={classNames("logout")}>
             <span>{email}</span>
-            <button className="btn--logout" onClick={() => dispatch(logout())}>
+            <button
+              className={classNames("btn--logout")}
+              onClick={() => dispatch(logout())}
+            >
               Выйти
             </button>
           </div>

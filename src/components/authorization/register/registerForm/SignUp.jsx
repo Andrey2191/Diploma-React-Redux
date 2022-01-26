@@ -1,8 +1,6 @@
 import { FormAuth } from "../../authorizationForm/Form";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../slice/userSlice";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { register } from "../../slice/registerSlice";
 
 export const SignUpForm = () => {
@@ -10,20 +8,6 @@ export const SignUpForm = () => {
   const { push } = useHistory();
 
   const handleRegister = (email, password) => {
-    // const auth = getAuth();
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then(({ user }) => {
-    //     console.log(user);
-    //     dispatch(
-    //       setUser({
-    //         email: user.email,
-    //         id: user.uid,
-    //         token: user.accessToken,
-    //       })
-    //     );
-    //     push("/");
-    //   })
-    //   .catch(console.error);
     dispatch(register({ email, password }));
   };
 

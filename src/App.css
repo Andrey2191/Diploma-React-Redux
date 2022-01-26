@@ -202,6 +202,9 @@ a {
   margin-left: 14px;
   margin-right: 14px;
 }
+.button--add {
+  display: flex;
+}
 .button--add svg {
   margin-right: 2px;
 }
@@ -1075,6 +1078,10 @@ body {
   flex-wrap: wrap;
 }
 
+.btnClose {
+  transform: rotate(45deg);
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     width: 1000px;
@@ -1097,19 +1104,25 @@ body {
 
 @media (max-width: 900px) {
   .wrapper {
-    width: 800px;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 820px;
+    border-radius: 0;
   }
   .content__top {
-    width: 700px;
+    width: 730px;
     overflow-x: scroll;
   }
 }
 @media (max-width: 768px) {
   .wrapper {
-    width: 668px;
+    width: 768px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 0;
   }
   .content__top {
-    width: 600px;
+    width: 660px;
   }
   .content {
     padding: 10px;
@@ -1271,5 +1284,8 @@ body {
 @media (max-width: 375px) {
   .wrapper {
     width: 375px;
+  }
+  .content__top {
+    width: 320px;
   }
 }
