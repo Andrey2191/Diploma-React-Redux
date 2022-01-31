@@ -7,6 +7,7 @@ import userReducer from "../authorization/slice/userSlice";
 import orderReducer from "../OrderHistoryComponents/orderSlice";
 import pizzaReducer from "../pizzaComponents/pizzaSlice/pizzaSlice";
 import saucesReducer from "../saucesComponents/saucesSlice";
+import cartReducer from "../../redux/reducers/cartReducer";
 
 const persistConfig = {
   key: "root",
@@ -17,7 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   filters,
   pizzas: pizzaReducer,
-  cart,
+  cart: cartReducer,
   sauces: saucesReducer,
   user: userReducer,
   orders: orderReducer,

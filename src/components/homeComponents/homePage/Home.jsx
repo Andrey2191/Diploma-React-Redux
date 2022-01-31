@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
 import { fetchPizzas } from "../../pizzaComponents/pizzaSlice/pizzaSlice";
+import { addPizzaToCart } from "../../../redux/reducers/cartReducer";
 
 const categoryNames = [
   "Мясные",
@@ -21,12 +22,14 @@ const sortIems = [
 
 function Home() {
   const dispatch = useDispatch();
-  const cartItems = useSelector(({ cart }) => cart.items);
+  // const cartItems = useSelector(({ cart }) => cart.items);
+  const cart = useSelector((state) => state.cart.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
   const pizzas = useSelector((state) => state.pizzas.pizzas);
   const { isAuth } = useAuth();
+  console.log(cart);
 
   React.useEffect(() => {
     dispatch(fetchPizzas(sortBy, category));
@@ -40,15 +43,15 @@ function Home() {
     dispatch(setSortBy(type));
   }, []);
 
-  // const handleAddPizzaToCart = (pizza) => {
-  //   dispatch(addPizzaToCart(pizza));
-  // };
-  const handleAddPizzaToCart = (obj) => {
-    dispatch({
-      type: "ADD_PIZZA_CART",
-      payload: obj,
-    });
+  const handleAddPizzaToCart = (pizza) => {
+    dispatch(addPizzaToCart(pizza));
   };
+  // const handleAddPizzaToCart = (obj) => {
+  //   dispatch({
+  //     type: "ADD_PIZZA_CART",
+  //     payload: obj,
+  //   });
+  // };
 
   return isAuth ? (
     <div className="container">
@@ -71,8 +74,8 @@ function Home() {
               <PizzaBlock
                 onClickAddPizza={handleAddPizzaToCart}
                 key={obj.id}
-                addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
-                // addedCount={cart?.count?.[obj.id]}
+                // addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
+                addedCount={cart?.count?.[obj.id]}
                 {...obj}
               />
             ))

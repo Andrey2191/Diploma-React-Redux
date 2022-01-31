@@ -5,7 +5,6 @@ import cartEmptyImage from "../../../assets/img/empty-cart.png";
 import { CartItem, Button, SaucesCard } from "../../index";
 import {
   clearCart,
-  removeCartItem,
   plusCartItem,
   minusCartItem,
 } from "../../../redux/actions/cart";
@@ -16,10 +15,12 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
+import { removeCartItem } from "../../../redux/reducers/cartReducer";
 
 function Cart() {
   const dispatch = useDispatch();
-  const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
+  const { totalPrice, totalCount, items } = useSelector((state) => state.cart);
+  const { pizzas } = useSelector((state) => state.pizzas);
   const sauces = useSelector((state) => state.sauces.sauces);
   const { isAuth, email } = useAuth();
 
@@ -28,7 +29,7 @@ function Cart() {
   }, [dispatch]);
 
   const addedPizzas = Object.keys(items).map((key) => {
-    return items[key].items[0];
+    return pizzas[Number(key)];
   });
 
   const onClearCart = () => {
@@ -49,10 +50,6 @@ function Cart() {
 
   const onMinusItem = (id) => {
     dispatch(minusCartItem(id));
-  };
-
-  const randomOrder = (min, max) => {
-    return Math.floor(Math.random() * (max - min));
   };
 
   const handleAddSaucesToCart = (obj) => {
@@ -88,8 +85,8 @@ function Cart() {
                 name={obj.name}
                 type={obj.type}
                 size={obj.size}
-                totalPrice={items[obj.id].totalPrice}
-                totalCount={items[obj.id].items.length}
+                // totalPrice={items[obj.id].totalPrice}
+                // totalCount={items[obj.id].items.length}
                 onRemove={onRemoveItem}
                 onMinus={onMinusItem}
                 onPlus={onPlusItem}
