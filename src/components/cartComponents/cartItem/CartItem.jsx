@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../../common/button/Button";
 import minusLogo from "../../../assets/img/minus.svg";
 import plusLogo from "../../../assets/img/plus.svg";
-import closeLogo from "../../../assets/img/close.svg";
 import { IoClose } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import classNames from "classnames";

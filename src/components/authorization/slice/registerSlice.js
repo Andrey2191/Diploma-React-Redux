@@ -1,6 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useHistory } from "react-router-dom";
 
 const initialState = {
   email: null,
@@ -12,7 +11,6 @@ export const register = createAsyncThunk(
   "register",
   async ({ email, password }, thunkAPI) => {
     const auth = getAuth();
-    const { push } = useHistory();
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {

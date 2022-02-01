@@ -4,7 +4,6 @@ import { fetchOrder } from "./orderSlice";
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useAuth } from "../authorization/authorizationHook/use-auth";
-import CartItem from "../cartComponents/cartItem/CartItem";
 import { Redirect } from "react-router-dom";
 import OrderItem from "./OrderItem";
 

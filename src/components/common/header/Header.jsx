@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { logout, removeUser } from "../../authorization/slice/userSlice";
+import { logout } from "../../authorization/slice/userSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { useDispatch } from "react-redux";
 import logoSvg from "../../../assets/img/pizza-logo.svg";
@@ -32,7 +32,7 @@ function Header() {
             <Button className={classNames("button--cart")}>
               <span>{totalPrice} руб.</span>
               <div className={classNames("button__delimiter")}></div>
-              <img width={20} src={cart} />
+              <img width={20} src={cart} alt="cart" />
 
               <span>{totalCount}</span>
             </Button>

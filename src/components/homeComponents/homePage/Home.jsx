@@ -29,7 +29,6 @@ function Home() {
 
   const pizzas = useSelector((state) => state.pizzas.pizzas);
   const { isAuth } = useAuth();
-  console.log(cart);
 
   React.useEffect(() => {
     dispatch(fetchPizzas(sortBy, category));

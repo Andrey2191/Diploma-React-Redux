@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import cartEmptyImage from "../../../assets/img/empty-cart.png";
 import { CartItem, Button, SaucesCard } from "../../index";
-import {
-  clearCart,
-  plusCartItem,
-  minusCartItem,
-} from "../../../redux/actions/cart";
+import { plusCartItem, minusCartItem } from "../../../redux/actions/cart";
 import { fetchSauces } from "../../saucesComponents/saucesSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
@@ -16,21 +12,28 @@ import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
 import { removeCartItem } from "../../../redux/reducers/cartReducer";
+import { clearCart } from "../../../redux/reducers/cartReducer";
 
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector((state) => state.cart);
   const { pizzas } = useSelector((state) => state.pizzas);
   const sauces = useSelector((state) => state.sauces.sauces);
-  const { isAuth, email } = useAuth();
+  const { isAuth } = useAuth();
 
   React.useEffect(() => {
     dispatch(fetchSauces());
   }, [dispatch]);
 
-  const addedPizzas = Object.keys(items).map((key) => {
-    return pizzas[Number(key)];
+  const addedPizzas = [];
+  Object.keys(items).forEach((key) => {
+    const blabla = pizzas.find((pizza) => {
+      console.log(items[pizza.id], pizza);
+      return pizza.id === Number(key);
+    });
+    addedPizzas.push({ ...blabla, cartSizes: items[key] });
   });
+  console.log(addedPizzas);
 
   const onClearCart = () => {
     if (window.confirm("Вы действительно хотите очистить корзину?")) {
@@ -77,21 +80,23 @@ function Cart() {
             </div>
           </div>
           <div className={classNames("content__items")}>
-            {addedPizzas.map((obj) => (
-              <CartItem
-                key={obj.id}
-                id={obj.id}
-                imageUrl={obj.imageUrl}
-                name={obj.name}
-                type={obj.type}
-                size={obj.size}
-                // totalPrice={items[obj.id].totalPrice}
-                // totalCount={items[obj.id].items.length}
-                onRemove={onRemoveItem}
-                onMinus={onMinusItem}
-                onPlus={onPlusItem}
-              />
-            ))}
+            {addedPizzas.map(({ cartSizes, ...obj }) =>
+              Object.keys(cartSizes).map((cartSize) => (
+                <CartItem
+                  key={obj.id}
+                  id={obj.id}
+                  imageUrl={obj.imageUrl}
+                  name={obj.name}
+                  type={obj.type}
+                  size={cartSize}
+                  // totalPrice={items[obj.id].totalPrice}
+                  // totalCount={items[obj.id].items.length}
+                  onRemove={onRemoveItem}
+                  onMinus={onMinusItem}
+                  onPlus={onPlusItem}
+                />
+              ))
+            )}
           </div>
           <span>Дополнительно</span>
           <div className={classNames("cart--sauces")}>
