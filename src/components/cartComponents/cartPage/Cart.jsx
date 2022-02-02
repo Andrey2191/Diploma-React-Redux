@@ -25,14 +25,15 @@ function Cart() {
     dispatch(fetchSauces());
   }, [dispatch]);
 
-  const addedPizzas = [];
-  Object.keys(items).forEach((key) => {
-    const blabla = pizzas.find((pizza) => {
-      return pizza.id === Number(key);
-    });
-    addedPizzas.push({ ...blabla, cartSizes: items[key] });
-  });
-  console.log(addedPizzas);
+  // const addedPizzas = [];
+  // Object.keys(items).forEach((key) => {
+  //   const blabla = pizzas.find((pizza) => {
+  //     return pizza.id === Number(key);
+  //   });
+  //   addedPizzas.push({ ...blabla, cartSizes: items[key] });
+  //   console.log(items[key]);
+  // });
+  // console.log(addedPizzas);
 
   const onClearCart = () => {
     if (window.confirm("Вы действительно хотите очистить корзину?")) {
@@ -79,7 +80,7 @@ function Cart() {
             </div>
           </div>
           <div className={classNames("content__items")}>
-            {addedPizzas.map(({ cartSizes, ...obj }) =>
+            {/* {addedPizzas.map(({ cartSizes, ...obj }) =>
               Object.keys(cartSizes).map((cartSize) => (
                 <CartItem
                   key={obj.id}
@@ -95,7 +96,22 @@ function Cart() {
                   onPlus={onPlusItem}
                 />
               ))
-            )}
+            )} */}
+            {Object.keys(items).map((key) => (
+              <CartItem
+                key={items[key].id}
+                id={items[key].id}
+                imageUrl={items[key].imageUrl}
+                name={items[key].name}
+                type={items[key].type}
+                size={items[key].size}
+                totalPrice={items[key].totalPrice}
+                totalCount={items[key].count}
+                onRemove={onRemoveItem}
+                onMinus={onMinusItem}
+                onPlus={onPlusItem}
+              />
+            ))}
           </div>
           <span>Дополнительно</span>
           <div className={classNames("cart--sauces")}>

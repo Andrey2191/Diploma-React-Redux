@@ -1,7 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: [],
+  items: {},
   count: {},
   totalPrice: 0,
   totalCount: 0,
@@ -17,19 +17,22 @@ export const addSaucesToCart = createAction("ADD_SAUCES_CART");
 const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addPizzaToCart, (state, action) => {
-      const { id, size, price, type } = action.payload;
+      const { id, size, price, type, count } = action.payload;
 
-      if (!state.items?.[id]) {
-        state.items[id] = {};
+      const pizza_key = id + "_" + size + "_" + type;
+
+      const addedPizza = { ...action.payload };
+      if (!state.items[pizza_key]) {
+        addedPizza.count = 1;
+        addedPizza.totalPrice = price;
+        state.items[pizza_key] = addedPizza;
+      } else {
+        state.items[pizza_key].totalPrice += price;
+        state.items[pizza_key].count++;
       }
 
-      const countBySize = state.items?.[id]?.[size];
-      // const countByType = state.items?.[id]?.[type];
-      state.count[id] = state.count?.[id] ? state.count[id] + 1 : 1;
-      state.items[id][size][type] = countBySize ? countBySize + 1 : 1;
-      // state.items[id][type] = countByType ? countByType + 1 : 1;
-      state.totalPrice = state.totalPrice + price;
-      state.totalCount = state.totalCount + 1;
+      state.totalCount++;
+      state.totalPrice += price;
     })
 
     .addCase(removeCartItem, (state, action) => {
