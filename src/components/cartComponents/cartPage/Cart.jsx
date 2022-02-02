@@ -28,7 +28,6 @@ function Cart() {
   const addedPizzas = [];
   Object.keys(items).forEach((key) => {
     const blabla = pizzas.find((pizza) => {
-      console.log(items[pizza.id], pizza);
       return pizza.id === Number(key);
     });
     addedPizzas.push({ ...blabla, cartSizes: items[key] });

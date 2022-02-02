@@ -33,8 +33,13 @@ const validationSchema = yup.object().shape({
 const ConfirmPage = () => {
   const { isAuth, email } = useAuth();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
-  const addedPizzas = Object.keys(items).map((key) => {
-    return items[key].items[0];
+  const { pizzas } = useSelector((state) => state.pizzas);
+  const addedPizzas = [];
+  Object.keys(items).forEach((key) => {
+    const blabla = pizzas.find((pizza) => {
+      return pizza.id === Number(key);
+    });
+    addedPizzas.push({ ...blabla, cartSizes: items[key] });
   });
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
