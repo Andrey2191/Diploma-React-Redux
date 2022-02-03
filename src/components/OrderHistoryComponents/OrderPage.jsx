@@ -41,19 +41,18 @@ export default function OrderPage() {
               </div>
 
               <div className={classNames("order-body")}>
-                {order.pizzas.map((pizza) => {
-                  return (
-                    <OrderItem
-                      key={pizza.id}
-                      id={pizza.id}
-                      imageUrl={pizza.imageUrl}
-                      name={pizza.name}
-                      type={pizza.type}
-                      size={pizza.size}
-                      totalPrice={pizza.price}
-                    />
-                  );
-                })}
+                {Object.keys(order.pizzas).map((key) => (
+                  <OrderItem
+                    key={order.pizzas[key].id}
+                    id={order.pizzas[key].id}
+                    imageUrl={order.pizzas[key].imageUrl}
+                    name={order.pizzas[key].name}
+                    type={order.pizzas[key].type}
+                    size={order.pizzas[key].size}
+                    totalPrice={order.pizzas[key].totalPrice}
+                    count={order.pizzas[key].count}
+                  />
+                ))}
               </div>
             </div>
           );

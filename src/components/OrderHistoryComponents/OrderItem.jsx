@@ -9,6 +9,7 @@ const OrderItem = ({
   totalPrice,
   totalCount,
   imageUrl,
+  count,
 }) => {
   return (
     <div className={classNames("order__item")}>
@@ -24,6 +25,10 @@ const OrderItem = ({
         <p>
           {type} , {size}
         </p>
+      </div>
+
+      <div className={classNames("order__item-price")}>
+        <b>{count} шт.</b>
       </div>
 
       <div className={classNames("order__item-price")}>

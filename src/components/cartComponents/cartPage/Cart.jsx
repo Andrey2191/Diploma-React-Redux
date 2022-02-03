@@ -17,23 +17,12 @@ import { clearCart } from "../../../redux/reducers/cartReducer";
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector((state) => state.cart);
-  const { pizzas } = useSelector((state) => state.pizzas);
   const sauces = useSelector((state) => state.sauces.sauces);
   const { isAuth } = useAuth();
 
   React.useEffect(() => {
     dispatch(fetchSauces());
   }, [dispatch]);
-
-  // const addedPizzas = [];
-  // Object.keys(items).forEach((key) => {
-  //   const blabla = pizzas.find((pizza) => {
-  //     return pizza.id === Number(key);
-  //   });
-  //   addedPizzas.push({ ...blabla, cartSizes: items[key] });
-  //   console.log(items[key]);
-  // });
-  // console.log(addedPizzas);
 
   const onClearCart = () => {
     if (window.confirm("Вы действительно хотите очистить корзину?")) {
@@ -80,23 +69,6 @@ function Cart() {
             </div>
           </div>
           <div className={classNames("content__items")}>
-            {/* {addedPizzas.map(({ cartSizes, ...obj }) =>
-              Object.keys(cartSizes).map((cartSize) => (
-                <CartItem
-                  key={obj.id}
-                  id={obj.id}
-                  imageUrl={obj.imageUrl}
-                  name={obj.name}
-                  type={obj.type}
-                  size={cartSize}
-                  // totalPrice={items[obj.id].totalPrice}
-                  // totalCount={items[obj.id].items.length}
-                  onRemove={onRemoveItem}
-                  onMinus={onMinusItem}
-                  onPlus={onPlusItem}
-                />
-              ))
-            )} */}
             {Object.keys(items).map((key) => (
               <CartItem
                 key={items[key].id}

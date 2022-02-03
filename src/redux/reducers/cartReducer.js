@@ -22,6 +22,7 @@ const cartReducer = createReducer(initialState, (builder) => {
       const pizza_key = id + "_" + size + "_" + type;
 
       const addedPizza = { ...action.payload };
+      console.log(action.payload);
       if (!state.items[pizza_key]) {
         addedPizza.count = 1;
         addedPizza.totalPrice = price;
@@ -33,16 +34,18 @@ const cartReducer = createReducer(initialState, (builder) => {
 
       state.totalCount++;
       state.totalPrice += price;
+
+      if (type === "традиционное") {
+        addedPizza.price = addedPizza.price + 3;
+      }
     })
 
     .addCase(removeCartItem, (state, action) => {
-      const { id, size, price } = action.payload;
+      const { id, size, price, type, count } = action.payload;
 
-      const countBySize = state.items?.[id]?.[size];
-      state.count[id] = state.count?.[id] ? state.count[id] + 1 : 1;
-      state.items[id][size] = countBySize ? countBySize + 1 : 1;
-      state.totalPrice = state.totalPrice + price;
-      state.totalCount = state.totalCount + 1;
+      const pizza_key = id + "_" + size + "_" + type;
+
+      const addedPizza = { ...action.payload };
     })
 
     .addCase(clearCart, (state, action) => {
