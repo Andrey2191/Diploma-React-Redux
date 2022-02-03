@@ -25,7 +25,7 @@ const validationSchema = yup.object().shape({
     .required("Must enter a address"),
   telephone: yup
     .number()
-    .min(0, "Must have a character")
+    .min(1, "Must have a character")
     .max(10, "Must be shorter than 10")
     .required("Must enter a telephone"),
 });

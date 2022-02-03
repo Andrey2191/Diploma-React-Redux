@@ -20,10 +20,10 @@ export default function OrderPage() {
         <h1>Ваши заказы</h1>
       </div>
 
-      {orders.map((order) => {
+      {orders.map((order, index) => {
         if (order.email === email) {
           return (
-            <div className={classNames("orderCard")}>
+            <div key={index} className={classNames("orderCard")}>
               <div className={classNames("order-title")}>
                 Ваш email: {order.email}
               </div>
@@ -43,13 +43,13 @@ export default function OrderPage() {
               <div className={classNames("order-body")}>
                 {Object.keys(order.pizzas).map((key) => (
                   <OrderItem
-                    key={order.pizzas[key].id}
+                    key={key}
                     id={order.pizzas[key].id}
                     imageUrl={order.pizzas[key].imageUrl}
                     name={order.pizzas[key].name}
                     type={order.pizzas[key].type}
                     size={order.pizzas[key].size}
-                    totalPrice={order.pizzas[key].totalPrice}
+                    totalPrice={order.pizzas[key].price}
                     count={order.pizzas[key].count}
                   />
                 ))}

@@ -30,9 +30,9 @@ function Cart() {
     }
   };
 
-  const onRemoveItem = (id) => {
+  const onRemoveItem = (item) => {
     if (window.confirm("Вы действительно хотите удалить?")) {
-      dispatch(removeCartItem(id));
+      dispatch(removeCartItem(item));
     }
   };
 
@@ -71,7 +71,7 @@ function Cart() {
           <div className={classNames("content__items")}>
             {Object.keys(items).map((key) => (
               <CartItem
-                key={items[key].id}
+                key={key}
                 id={items[key].id}
                 imageUrl={items[key].imageUrl}
                 name={items[key].name}
@@ -79,9 +79,9 @@ function Cart() {
                 size={items[key].size}
                 totalPrice={items[key].totalPrice}
                 totalCount={items[key].count}
-                onRemove={onRemoveItem}
+                onRemove={() => onRemoveItem(key)}
                 onMinus={onMinusItem}
-                onPlus={onPlusItem}
+                onPlus={() => onPlusItem(key)}
               />
             ))}
           </div>
@@ -91,6 +91,7 @@ function Cart() {
               sauces.map((obj) => (
                 <SaucesCard
                   key={obj.id}
+                  id={obj.id}
                   name={obj.name}
                   imageUrl={obj.imageUrl}
                   price={obj.price}

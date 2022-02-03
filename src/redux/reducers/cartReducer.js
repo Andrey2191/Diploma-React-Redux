@@ -18,36 +18,64 @@ const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addPizzaToCart, (state, action) => {
       const { id, size, price, type, count } = action.payload;
-
       const pizza_key = id + "_" + size + "_" + type;
-
       const addedPizza = { ...action.payload };
-      console.log(action.payload);
-      if (!state.items[pizza_key]) {
-        addedPizza.count = 1;
-        addedPizza.totalPrice = price;
-        state.items[pizza_key] = addedPizza;
-      } else {
-        state.items[pizza_key].totalPrice += price;
-        state.items[pizza_key].count++;
-      }
-
-      state.totalCount++;
-      state.totalPrice += price;
 
       if (type === "традиционное") {
         addedPizza.price = addedPizza.price + 3;
       }
-    })
+      if (size === 30) {
+        addedPizza.price = addedPizza.price + 3;
+      }
+      if (size === 40) {
+        addedPizza.price = addedPizza.price + 5;
+      }
 
+      if (!state.items[pizza_key]) {
+        addedPizza.count = 1;
+        addedPizza.totalPrice = addedPizza.price;
+        state.items[pizza_key] = addedPizza;
+      } else {
+        state.items[pizza_key].totalPrice += addedPizza.price;
+        state.items[pizza_key].count++;
+      }
+
+      state.totalCount++;
+      state.totalPrice += addedPizza.price;
+    })
     .addCase(removeCartItem, (state, action) => {
-      const { id, size, price, type, count } = action.payload;
+      const key = action.payload;
 
-      const pizza_key = id + "_" + size + "_" + type;
-
-      const addedPizza = { ...action.payload };
+      const items = { ...state.items };
+      delete items[key];
+      state.items = items;
     })
+    .addCase(plusCartItem, (state, action) => {
+      const key = action.payload;
+      state.items[key].count++;
+      state.totalCount++;
 
+      state.items[key].totalPrice += state.items[key].price;
+      state.totalPrice += state.items[key].price;
+
+      state.items = { ...state.items };
+    })
+    .addCase(addSaucesToCart, (state, action) => {
+      const { id, price } = action.payload;
+      const sauces_key = id;
+      const addedSauces = { ...action.payload };
+
+      if (!state.items[sauces_key]) {
+        addedSauces.count = 1;
+        addedSauces.totalPrice = addedSauces.price;
+        state.items[sauces_key] = addedSauces;
+      } else {
+        state.items[sauces_key].totalPrice += price;
+        state.items[sauces_key].count++;
+      }
+      state.totalCount++;
+      state.totalPrice += addedSauces.price;
+    })
     .addCase(clearCart, (state, action) => {
       state.count = 0;
       state.items = {};
