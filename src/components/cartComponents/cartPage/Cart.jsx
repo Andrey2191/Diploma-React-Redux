@@ -80,7 +80,7 @@ function Cart() {
                 totalPrice={items[key].totalPrice}
                 totalCount={items[key].count}
                 onRemove={() => onRemoveItem(key)}
-                onMinus={onMinusItem}
+                onMinus={() => onMinusItem(key)}
                 onPlus={() => onPlusItem(key)}
               />
             ))}

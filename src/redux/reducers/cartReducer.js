@@ -48,15 +48,30 @@ const cartReducer = createReducer(initialState, (builder) => {
 
       const items = { ...state.items };
       delete items[key];
+      state.totalPrice = state.totalPrice - state.items[key].totalPrice;
+      state.totalCount = state.totalCount - state.items[key].count;
       state.items = items;
+      console.log(state.price);
     })
     .addCase(plusCartItem, (state, action) => {
       const key = action.payload;
       state.items[key].count++;
       state.totalCount++;
-
+      console.log(state.items[key].count);
       state.items[key].totalPrice += state.items[key].price;
       state.totalPrice += state.items[key].price;
+
+      state.items = { ...state.items };
+    })
+    .addCase(minusCartItem, (state, action) => {
+      const key = action.payload;
+      state.items[key].count--;
+      state.totalCount--;
+      console.log(key);
+
+      state.items[key].totalPrice =
+        state.items[key].totalPrice - state.items[key].price;
+      state.totalPrice = state.totalPrice - state.items[key].price;
 
       state.items = { ...state.items };
     })
@@ -76,7 +91,7 @@ const cartReducer = createReducer(initialState, (builder) => {
       state.totalCount++;
       state.totalPrice += addedSauces.price;
     })
-    .addCase(clearCart, (state, action) => {
+    .addCase(clearCart, (state) => {
       state.count = 0;
       state.items = {};
       state.totalPrice = 0;
