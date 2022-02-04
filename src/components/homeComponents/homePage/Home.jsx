@@ -22,7 +22,6 @@ const sortIems = [
 
 function Home() {
   const dispatch = useDispatch();
-  // const cartItems = useSelector(({ cart }) => cart.items);
   const cart = useSelector((state) => state.cart.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
@@ -34,8 +33,8 @@ function Home() {
     dispatch(fetchPizzas(sortBy, category));
   }, [category, sortBy]);
 
-  const onSelectCategory = React.useCallback((index) => {
-    dispatch(setCategory(index));
+  const onSelectCategory = React.useCallback((id) => {
+    dispatch(setCategory(id));
   }, []);
 
   const onSelectSortType = React.useCallback((type) => {

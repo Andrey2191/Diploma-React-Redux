@@ -15,7 +15,12 @@ function PizzaBlock({
   onClickAddPizza,
   addedCount,
 }) {
-  const availableTypes = ["тонкое", "традиционное"];
+  const obj = {
+    thin: "тонкое",
+    traditional: "традиционное",
+  };
+
+  const availableTypes = [obj.thin, obj.traditional];
   const availableSizes = [26, 30, 40];
 
   const [activeType, setActiveType] = React.useState(types[0]);
