@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
 import { fetchPizzas } from "../../pizzaComponents/pizzaSlice/pizzaSlice";
-import { addPizzaToCart } from "../../../redux/reducers/cartReducer";
+import { addPizzaToCart } from "../../cartComponents/cartReducer/cartReducer";
 
 const categoryNames = [
   "Мясные",
@@ -45,12 +45,6 @@ function Home() {
   const handleAddPizzaToCart = (pizza) => {
     dispatch(addPizzaToCart(pizza));
   };
-  // const handleAddPizzaToCart = (obj) => {
-  //   dispatch({
-  //     type: "ADD_PIZZA_CART",
-  //     payload: obj,
-  //   });
-  // };
 
   return isAuth ? (
     <div className="container">
@@ -73,7 +67,6 @@ function Home() {
               <PizzaBlock
                 onClickAddPizza={handleAddPizzaToCart}
                 key={obj.id}
-                // addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
                 addedCount={cart?.count?.[obj.id]}
                 {...obj}
               />

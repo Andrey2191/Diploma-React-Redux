@@ -3,7 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import cartEmptyImage from "../../../assets/img/empty-cart.png";
 import { CartItem, Button, SaucesCard } from "../../index";
-import { plusCartItem, minusCartItem } from "../../../redux/actions/cart";
+import {
+  plusCartItem,
+  minusCartItem,
+  removeCartItem,
+  clearCart,
+  addSaucesToCart,
+} from "../cartReducer/cartReducer";
 import { fetchSauces } from "../../saucesComponents/saucesSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
@@ -11,8 +17,6 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
-import { removeCartItem } from "../../../redux/reducers/cartReducer";
-import { clearCart } from "../../../redux/reducers/cartReducer";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -44,11 +48,8 @@ function Cart() {
     dispatch(minusCartItem(id));
   };
 
-  const handleAddSaucesToCart = (obj) => {
-    dispatch({
-      type: "ADD_SAUCES_CART",
-      payload: obj,
-    });
+  const handleAddSaucesToCart = (id) => {
+    dispatch(addSaucesToCart(id));
   };
 
   return isAuth ? (
