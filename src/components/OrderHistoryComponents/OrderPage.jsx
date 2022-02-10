@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import classNames from "classnames";
 import { useAuth } from "../authorization/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
-import OrderItem from "./OrderItem";
+import OrderItem from "./OrderPizzaItem";
+import OrderSaucesItem from "./orderSaucesItem";
 
 export default function OrderPage() {
   const orders = useSelector((state) => state.orders.orders);
@@ -22,6 +23,7 @@ export default function OrderPage() {
 
       {orders.map((order, index) => {
         if (order.email === email) {
+          console.log(order);
           return (
             <div key={index} className={classNames("orderCard")}>
               <div className={classNames("order-title")}>
@@ -51,6 +53,16 @@ export default function OrderPage() {
                     size={order.pizzas[key].size}
                     totalPrice={order.pizzas[key].price}
                     count={order.pizzas[key].count}
+                  />
+                ))}
+                {Object.keys(order.sauces).map((key) => (
+                  <OrderSaucesItem
+                    key={key}
+                    id={order.sauces[key].id}
+                    imageUrl={order.sauces[key].imageUrl}
+                    name={order.sauces[key].name}
+                    totalPrice={order.sauces[key].totalPrice}
+                    count={order.sauces[key].count}
                   />
                 ))}
               </div>

@@ -907,11 +907,15 @@ body {
   color: #f24701;
   cursor: pointer;
 }
+.header__buttons {
+  display: flex;
+}
 
 .logout {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin: 5px;
 }
 
 .logout {

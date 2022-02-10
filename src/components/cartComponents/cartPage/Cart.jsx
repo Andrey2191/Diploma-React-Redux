@@ -9,6 +9,9 @@ import {
   removeCartItem,
   clearCart,
   addSaucesToCart,
+  plusCartSaucesItem,
+  minusCartSaucesItem,
+  removeCartSaucesItem,
 } from "../cartReducer/cartReducer";
 import { fetchSauces } from "../../saucesComponents/saucesSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
@@ -17,10 +20,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
+import CartSaucesItem from "../cartItem/cartSaucesItem";
 
 function Cart() {
   const dispatch = useDispatch();
-  const { totalPrice, totalCount, items } = useSelector((state) => state.cart);
+  const { totalPrice, totalCount, items, saucesItems } = useSelector(
+    (state) => state.cart
+  );
   const sauces = useSelector((state) => state.sauces.sauces);
   const { isAuth } = useAuth();
 
@@ -39,13 +45,24 @@ function Cart() {
       dispatch(removeCartItem(item));
     }
   };
+  const onRemoveSaucesItem = (item) => {
+    if (window.confirm("Вы действительно хотите удалить?")) {
+      dispatch(removeCartSaucesItem(item));
+    }
+  };
 
   const onPlusItem = (id) => {
     dispatch(plusCartItem(id));
   };
+  const onPlusSaucesItem = (id) => {
+    dispatch(plusCartSaucesItem(id));
+  };
 
   const onMinusItem = (id) => {
     dispatch(minusCartItem(id));
+  };
+  const onMinusSaucesItem = (id) => {
+    dispatch(minusCartSaucesItem(id));
   };
 
   const handleAddSaucesToCart = (id) => {
@@ -83,6 +100,19 @@ function Cart() {
                 onRemove={() => onRemoveItem(key)}
                 onMinus={() => onMinusItem(key)}
                 onPlus={() => onPlusItem(key)}
+              />
+            ))}
+            {Object.keys(saucesItems).map((key) => (
+              <CartSaucesItem
+                key={key}
+                id={saucesItems[key].id}
+                imageUrl={saucesItems[key].imageUrl}
+                name={saucesItems[key].name}
+                totalPrice={saucesItems[key].totalPrice}
+                totalCount={saucesItems[key].count}
+                onRemove={() => onRemoveSaucesItem(key)}
+                onMinus={() => onMinusSaucesItem(key)}
+                onPlus={() => onPlusSaucesItem(key)}
               />
             ))}
           </div>

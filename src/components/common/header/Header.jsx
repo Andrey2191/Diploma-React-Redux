@@ -37,16 +37,21 @@ function Header() {
               <span>{totalCount}</span>
             </Button>
           </Link>
-          <div className={classNames("logout")}>
-            <span>{email}</span>
-            <button
-              className={classNames("btn--logout")}
-              onClick={() => dispatch(logout())}
-            >
-              Выйти
-            </button>
+          <div className="header__buttons">
+            <Link to="/order">
+              <div className={classNames("logout")}>
+                <button className={classNames("btn--logout")}>Заказы</button>
+              </div>
+            </Link>
+            <div className={classNames("logout")}>
+              <button
+                className={classNames("btn--logout")}
+                onClick={() => dispatch(logout())}
+              >
+                Выйти
+              </button>
+            </div>
           </div>
-          <Link to="/order">ORDER</Link>
         </div>
       </div>
     </div>

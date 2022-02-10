@@ -24,7 +24,8 @@ const validationSchema = yup.object().shape({
     .max(25, "Must be shorter than 25")
     .required("Must enter a address"),
   telephone: yup
-    .number()
+    .string()
+
     .min(1, "Must have a character")
     .max(10, "Must be shorter than 10")
     .required("Must enter a telephone"),
@@ -32,7 +33,9 @@ const validationSchema = yup.object().shape({
 
 const ConfirmPage = () => {
   const { isAuth, email } = useAuth();
-  const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
+  const { totalPrice, totalCount, items, saucesItems } = useSelector(
+    ({ cart }) => cart
+  );
   const { pizzas } = useSelector((state) => state.pizzas);
   const addedPizzas = [];
   // Object.keys(items).forEach((key) => {
@@ -50,7 +53,7 @@ const ConfirmPage = () => {
       email: email,
       cost: totalPrice,
       pizzas: items,
-
+      sauces: saucesItems,
       totalCount: totalCount,
     });
   };
