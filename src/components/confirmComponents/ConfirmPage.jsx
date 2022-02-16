@@ -36,14 +36,6 @@ const ConfirmPage = () => {
   const { totalPrice, totalCount, items, saucesItems } = useSelector(
     ({ cart }) => cart
   );
-  const { pizzas } = useSelector((state) => state.pizzas);
-  const addedPizzas = [];
-  // Object.keys(items).forEach((key) => {
-  //   const blabla = pizzas.find((pizza) => {
-  //     return pizza.id === Number(key);
-  //   });
-  //   addedPizzas.push({ ...blabla, cartSizes: items[key] });
-  // });
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
     const docRef = addDoc(collection(db, "usersOrder"), {

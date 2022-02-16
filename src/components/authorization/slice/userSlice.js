@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { clearCart } from "../../cartComponents/cartReducer/cartReducer";
-import { useDispatch, useSelector } from "react-redux";
 
 const initialState = { email: null, token: null, id: null, error: null };
 
@@ -50,11 +48,7 @@ const userSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(logout.fulfilled, () => {
-      // totalPrice = 0;
-      // totalCount = 0;
-      // items = {};
-    });
+    builder.addCase(logout.fulfilled, () => initialState);
     builder.addMatcher(
       (action) => action.type.endsWith("/rejected")
       // (state, action) => {
