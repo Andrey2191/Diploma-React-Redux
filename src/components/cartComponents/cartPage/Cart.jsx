@@ -21,6 +21,16 @@ import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
 import CartSaucesItem from "../cartItem/cartSaucesItem";
+// import {
+//   onClearCart,
+//   onRemoveItem,
+//   onRemoveSaucesItem,
+//   onPlusItem,
+//   onPlusSaucesItem,
+//   onMinusItem,
+//   onMinusSaucesItem,
+//   handleAddSaucesToCart,
+// } from "../containers/cartPage/Cart";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -69,7 +79,7 @@ function Cart() {
     dispatch(addSaucesToCart(id));
   };
 
-  return isAuth ? (
+  return (
     <div className={classNames("container container--cart")}>
       {totalCount ? (
         <div className={classNames("cart")}>
@@ -176,8 +186,6 @@ function Cart() {
         </div>
       )}
     </div>
-  ) : (
-    <Redirect to="/login" />
   );
 }
 

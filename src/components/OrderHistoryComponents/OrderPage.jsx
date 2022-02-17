@@ -15,7 +15,7 @@ export default function OrderPage() {
   useEffect(() => {
     dispatch(fetchOrder());
   }, []);
-  return isAuth ? (
+  return (
     <div className="history--page">
       <div className={classNames("order-header")}>
         <h1>Ваши заказы</h1>
@@ -71,16 +71,5 @@ export default function OrderPage() {
         }
       })}
     </div>
-  ) : (
-    <Redirect to="/login" />
   );
 }
-
-// return (
-//   <div className={classNames("orderCard")}>
-//     <span>{order.email}</span>
-//     <span>{order.name}</span>
-//     <span>{order.telephone}</span>
-//     <span>{order.address}</span>
-//   </div>
-// );

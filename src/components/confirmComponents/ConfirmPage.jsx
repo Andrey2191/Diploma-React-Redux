@@ -50,7 +50,7 @@ const ConfirmPage = () => {
     });
   };
 
-  return isAuth ? (
+  return (
     <div className={classNames("confirm--page")}>
       <div className={classNames("confirm--header")}>
         <h1>Введите ваши данные</h1>
@@ -146,8 +146,6 @@ const ConfirmPage = () => {
         </Link>
       </div>
     </div>
-  ) : (
-    <Redirect to="/login" />
   );
 };
 

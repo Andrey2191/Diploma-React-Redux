@@ -8,6 +8,7 @@ import Register from "./components/authorization/register/registerPage/Register"
 import OrderPage from "./components/OrderHistoryComponents/OrderPage";
 import ConfirmPage from "./components/confirmComponents/ConfirmPage";
 import { Route, Switch } from "react-router-dom";
+import { PrivateRoute } from "./components/common/privateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -15,12 +16,12 @@ function App() {
       <Header />
       <div className="content">
         <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/cart" component={Cart} exact />
+          <PrivateRoute path="/" component={Home} exact />
+          <PrivateRoute path="/cart" component={Cart} exact />
+          <PrivateRoute path="/order" component={OrderPage} exact />
+          <PrivateRoute path="/confirm" component={ConfirmPage} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Register} exact />
-          <Route path="/order" component={OrderPage} exact />
-          <Route path="/confirm" component={ConfirmPage} exact />
         </Switch>
       </div>
     </div>

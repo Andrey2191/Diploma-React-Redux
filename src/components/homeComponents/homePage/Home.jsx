@@ -45,7 +45,7 @@ function Home() {
     dispatch(addPizzaToCart(pizza));
   };
 
-  return isAuth ? (
+  return (
     <div className="container">
       <div className="content__top">
         <Categories
@@ -75,8 +75,6 @@ function Home() {
               .map((_, index) => <PizzaLoadingBlock key={index} />)}
       </div>
     </div>
-  ) : (
-    <Redirect to="/login" />
   );
 }
 
