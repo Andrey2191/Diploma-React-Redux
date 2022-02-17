@@ -15,7 +15,6 @@ import {
 } from "../cartReducer/cartReducer";
 import { fetchSauces } from "../../saucesComponents/saucesSlice";
 import { useAuth } from "../../authorization/authorizationHook/use-auth";
-import { Redirect } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
@@ -32,7 +31,16 @@ import CartSaucesItem from "../cartItem/cartSaucesItem";
 //   handleAddSaucesToCart,
 // } from "../containers/cartPage/Cart";
 
-function Cart() {
+function Cart({
+  onClearCart,
+  onRemoveItem,
+  onRemoveSaucesItem,
+  onPlusItem,
+  onPlusSaucesItem,
+  onMinusItem,
+  onMinusSaucesItem,
+  handleAddSaucesToCart,
+}) {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items, saucesItems } = useSelector(
     (state) => state.cart
@@ -44,40 +52,41 @@ function Cart() {
     dispatch(fetchSauces());
   }, [dispatch]);
 
-  const onClearCart = () => {
-    if (window.confirm("Вы действительно хотите очистить корзину?")) {
-      dispatch(clearCart());
-    }
-  };
+  // const onClearCart = () => {
+  //   if (window.confirm("Вы действительно хотите очистить корзину?")) {
+  //     dispatch(clearCart());
+  //   }
+  // };
 
-  const onRemoveItem = (item) => {
-    if (window.confirm("Вы действительно хотите удалить?")) {
-      dispatch(removeCartItem(item));
-    }
-  };
-  const onRemoveSaucesItem = (item) => {
-    if (window.confirm("Вы действительно хотите удалить?")) {
-      dispatch(removeCartSaucesItem(item));
-    }
-  };
+  // const onRemoveItem = (item) => {
+  //   if (window.confirm("Вы действительно хотите удалить?")) {
+  //     dispatch(removeCartItem(item));
+  //   }
+  // };
+  // const onRemoveSaucesItem = (item) => {
+  //   if (window.confirm("Вы действительно хотите удалить?")) {
+  //     dispatch(removeCartSaucesItem(item));
+  //   }
+  // };
 
-  const onPlusItem = (id) => {
-    dispatch(plusCartItem(id));
-  };
-  const onPlusSaucesItem = (id) => {
-    dispatch(plusCartSaucesItem(id));
-  };
+  // const onPlusItem = (id) => {
+  //   dispatch(plusCartItem(id));
+  // };
+  // const onPlusSaucesItem = (id) => {
+  //   dispatch(plusCartSaucesItem(id));
+  // };
 
-  const onMinusItem = (id) => {
-    dispatch(minusCartItem(id));
-  };
-  const onMinusSaucesItem = (id) => {
-    dispatch(minusCartSaucesItem(id));
-  };
+  // const onMinusItem = (id) => {
+  //   dispatch(minusCartItem(id));
+  // };
+  // const onMinusSaucesItem = (id) => {
+  //   dispatch(minusCartSaucesItem(id));
+  // };
 
-  const handleAddSaucesToCart = (id) => {
-    dispatch(addSaucesToCart(id));
-  };
+  // const handleAddSaucesToCart = (id) => {
+  //   dispatch(addSaucesToCart(id));
+  // };
+  console.log(handleAddSaucesToCart);
 
   return (
     <div className={classNames("container container--cart")}>
@@ -136,7 +145,7 @@ function Cart() {
                   name={obj.name}
                   imageUrl={obj.imageUrl}
                   price={obj.price}
-                  onClickAddSauces={handleAddSaucesToCart}
+                  onClickAddSauces={() => handleAddSaucesToCart(1)}
                 />
               ))}
           </div>

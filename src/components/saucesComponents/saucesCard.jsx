@@ -8,7 +8,10 @@ export default function SaucesCard({
   imageUrl,
   price,
   onClickAddSauces,
+  ...rest
 }) {
+  console.log(onClickAddSauces);
+  console.log(rest);
   const onAddSauces = () => {
     const obj = {
       id,

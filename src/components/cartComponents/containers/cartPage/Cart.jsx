@@ -1,76 +1,54 @@
-// // import { useSelector, useDispatch } from "react-redux";
-// // import {
-// //   plusCartItem,
-// //   minusCartItem,
-// //   removeCartItem,
-// //   clearCart,
-// //   addSaucesToCart,
-// //   plusCartSaucesItem,
-// //   minusCartSaucesItem,
-// //   removeCartSaucesItem,
-// // } from "../../cartReducer/cartReducer";
+import { useDispatch } from "react-redux";
+import { Cart } from "../../..";
 
-// import { useDispatch } from "react-redux";
+export default function CartContainer() {
+  const dispatch = useDispatch();
 
-// // export const OnClearCart = () => {
-// //   if (window.confirm("Вы действительно хотите очистить корзину?")) {
-// //     dispatch(clearCart());
-// //   }
-// // };
+  const onClearCart = () => {
+    if (window.confirm("Вы действительно хотите очистить корзину?")) {
+      dispatch(clearCart());
+    }
+  };
 
-// // export const OnRemoveItem = (item) => {
-// //   if (window.confirm("Вы действительно хотите удалить?")) {
-// //     dispatch(removeCartItem(item));
-// //   }
-// // };
-// // export const OnRemoveSaucesItem = (item) => {
-// //   if (window.confirm("Вы действительно хотите удалить?")) {
-// //     dispatch(removeCartSaucesItem(item));
-// //   }
-// // };
+  const onRemoveItem = (item) => {
+    if (window.confirm("Вы действительно хотите удалить?")) {
+      dispatch(removeCartItem(item));
+    }
+  };
+  const onRemoveSaucesItem = (item) => {
+    if (window.confirm("Вы действительно хотите удалить?")) {
+      dispatch(removeCartSaucesItem(item));
+    }
+  };
 
-// export const onPlusItem = (id) => {
-//   const dispatch = useDispatch();
-//   dispatch(plusCartItem(id));
-// };
-// export const onPlusSaucesItem = (id) => {
-//   const dispatch = useDispatch();
-//   dispatch(plusCartSaucesItem(id));
-// };
+  const onPlusItem = (id) => {
+    dispatch(plusCartItem(id));
+  };
+  const onPlusSaucesItem = (id) => {
+    dispatch(plusCartSaucesItem(id));
+  };
 
-// export const onMinusItem = (id) => {
-//   const dispatch = useDispatch();
-//   dispatch(minusCartItem(id));
-// };
-// export const onMinusSaucesItem = (id) => {
-//   const dispatch = useDispatch();
-//   dispatch(minusCartSaucesItem(id));
-// };
+  const onMinusItem = (id) => {
+    dispatch(minusCartItem(id));
+  };
+  const onMinusSaucesItem = (id) => {
+    dispatch(minusCartSaucesItem(id));
+  };
 
-// export const handleAddSaucesToCart = (id) => {
-//   const dispatch = useDispatch();
-//   dispatch(addSaucesToCart(id));
-// };
+  const handleAddSaucesToCart = (id) => {
+    dispatch(addSaucesToCart(id));
+  };
 
-// export default function CartContainer() {
-//   const dispatch = useDispatch();
-
-//   const onPlusItem = (id) => {
-//     dispatch(plusCartItem(id));
-//   };
-//   const onPlusSaucesItem = (id) => {
-//     dispatch(plusCartSaucesItem(id));
-//   };
-
-//   const onMinusItem = (id) => {
-//     const dispatch = useDispatch();
-//     dispatch(minusCartItem(id));
-//   };
-//   const onMinusSaucesItem = (id) => {
-//     dispatch(minusCartSaucesItem(id));
-//   };
-
-//   const handleAddSaucesToCart = (id) => {
-//     dispatch(addSaucesToCart(id));
-//   };
-// }
+  return (
+    <Cart
+      onClearCart={onClearCart}
+      onRemoveItem={onRemoveItem}
+      onRemoveSaucesItem={onRemoveSaucesItem}
+      onPlusItem={onPlusItem}
+      onPlusSaucesItem={onPlusSaucesItem}
+      onMinusItem={onMinusItem}
+      onMinusSaucesItem={onMinusSaucesItem}
+      handleAddSaucesToCart={handleAddSaucesToCart}
+    />
+  );
+}
