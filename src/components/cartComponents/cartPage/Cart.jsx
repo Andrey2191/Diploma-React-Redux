@@ -145,7 +145,7 @@ function Cart({
                   name={obj.name}
                   imageUrl={obj.imageUrl}
                   price={obj.price}
-                  onClickAddSauces={() => handleAddSaucesToCart(1)}
+                  onClickAddSauces={handleAddSaucesToCart}
                 />
               ))}
           </div>

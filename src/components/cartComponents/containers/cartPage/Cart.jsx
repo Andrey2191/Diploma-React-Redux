@@ -1,5 +1,15 @@
 import { useDispatch } from "react-redux";
-import { Cart } from "../../..";
+import Cart from "../../cartPage/Cart";
+import {
+  plusCartItem,
+  minusCartItem,
+  removeCartItem,
+  clearCart,
+  addSaucesToCart,
+  plusCartSaucesItem,
+  minusCartSaucesItem,
+  removeCartSaucesItem,
+} from "../../cartReducer/cartReducer";
 
 export default function CartContainer() {
   const dispatch = useDispatch();

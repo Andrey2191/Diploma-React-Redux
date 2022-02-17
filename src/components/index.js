@@ -7,4 +7,4 @@ export { default as PizzaLoadingBlock } from "./pizzaComponents/pizzaCard/pizzaL
 export { default as CartItem } from "./cartComponents/cartItem/CartItem";
 export { default as SaucesCard } from "./saucesComponents/saucesCard";
 export { default as Home } from "./homeComponents/homePage/Home";
-export { default as Cart } from "./cartComponents/cartPage/Cart";
+export { default as Cart } from "./cartComponents/containers/cartPage/Cart";
