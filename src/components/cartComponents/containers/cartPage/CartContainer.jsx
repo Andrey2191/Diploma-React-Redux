@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import Cart from "../../cartPage/Cart";
+import Cart from "../../components/cartPage/Cart";
+import CartSaucesItem from "../../components/cartSaucesItem/cartSaucesItem";
 import {
   plusCartItem,
   minusCartItem,
@@ -9,7 +10,7 @@ import {
   plusCartSaucesItem,
   minusCartSaucesItem,
   removeCartSaucesItem,
-} from "../../cartReducer/cartReducer";
+} from "../cartReducer/cartReducer";
 
 export default function CartContainer() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export default function CartContainer() {
   const handleAddSaucesToCart = (id) => {
     dispatch(addSaucesToCart(id));
   };
-
+  console.log(onPlusItem);
   return (
     <Cart
       onClearCart={onClearCart}

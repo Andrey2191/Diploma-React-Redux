@@ -1,35 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import cartEmptyImage from "../../../assets/img/empty-cart.png";
-import { CartItem, Button, SaucesCard } from "../../index";
-import {
-  plusCartItem,
-  minusCartItem,
-  removeCartItem,
-  clearCart,
-  addSaucesToCart,
-  plusCartSaucesItem,
-  minusCartSaucesItem,
-  removeCartSaucesItem,
-} from "../cartReducer/cartReducer";
-import { fetchSauces } from "../../saucesComponents/saucesSlice";
-import { useAuth } from "../../authorization/authorizationHook/use-auth";
+import cartEmptyImage from "../../../../assets/img/empty-cart.png";
+import { CartItem, Button, SaucesCard } from "../../../index";
+
+import { fetchSauces } from "../../../saucesComponents/saucesSlice";
+import { useAuth } from "../../../authorization/authorizationHook/use-auth";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
-import CartSaucesItem from "../cartItem/cartSaucesItem";
-// import {
-//   onClearCart,
-//   onRemoveItem,
-//   onRemoveSaucesItem,
-//   onPlusItem,
-//   onPlusSaucesItem,
-//   onMinusItem,
-//   onMinusSaucesItem,
-//   handleAddSaucesToCart,
-// } from "../containers/cartPage/Cart";
+import CartSaucesItem from "../cartSaucesItem/cartSaucesItem";
+import CartItemContainer from "../../containers/cartItem/CartItemContainer";
 
 function Cart({
   onClearCart,
@@ -41,6 +23,7 @@ function Cart({
   onMinusSaucesItem,
   handleAddSaucesToCart,
 }) {
+  console.log(onPlusItem);
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items, saucesItems } = useSelector(
     (state) => state.cart
@@ -51,42 +34,6 @@ function Cart({
   React.useEffect(() => {
     dispatch(fetchSauces());
   }, [dispatch]);
-
-  // const onClearCart = () => {
-  //   if (window.confirm("Вы действительно хотите очистить корзину?")) {
-  //     dispatch(clearCart());
-  //   }
-  // };
-
-  // const onRemoveItem = (item) => {
-  //   if (window.confirm("Вы действительно хотите удалить?")) {
-  //     dispatch(removeCartItem(item));
-  //   }
-  // };
-  // const onRemoveSaucesItem = (item) => {
-  //   if (window.confirm("Вы действительно хотите удалить?")) {
-  //     dispatch(removeCartSaucesItem(item));
-  //   }
-  // };
-
-  // const onPlusItem = (id) => {
-  //   dispatch(plusCartItem(id));
-  // };
-  // const onPlusSaucesItem = (id) => {
-  //   dispatch(plusCartSaucesItem(id));
-  // };
-
-  // const onMinusItem = (id) => {
-  //   dispatch(minusCartItem(id));
-  // };
-  // const onMinusSaucesItem = (id) => {
-  //   dispatch(minusCartSaucesItem(id));
-  // };
-
-  // const handleAddSaucesToCart = (id) => {
-  //   dispatch(addSaucesToCart(id));
-  // };
-  console.log(handleAddSaucesToCart);
 
   return (
     <div className={classNames("container container--cart")}>
@@ -107,7 +54,7 @@ function Cart({
           </div>
           <div className={classNames("content__items")}>
             {Object.keys(items).map((key) => (
-              <CartItem
+              <CartItemContainer
                 key={key}
                 id={items[key].id}
                 imageUrl={items[key].imageUrl}
@@ -152,7 +99,7 @@ function Cart({
           <div className={classNames("cart__bottom")}>
             <div className={classNames("cart__bottom-details")}>
               <span>
-                Всего пицц: <b>{totalCount} шт.</b>
+                Всего : <b>{totalCount} шт.</b>
               </span>
               <span>
                 Сумма заказа: <b>{totalPrice} руб.</b>

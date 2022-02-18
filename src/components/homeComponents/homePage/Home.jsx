@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
 import { fetchPizzas } from "../../pizzaComponents/pizzaSlice/pizzaSlice";
-import { addPizzaToCart } from "../../cartComponents/cartReducer/cartReducer";
+import { addPizzaToCart } from "../../cartComponents/containers/cartReducer/cartReducer";
 
 const categoryNames = [
   "Мясные",

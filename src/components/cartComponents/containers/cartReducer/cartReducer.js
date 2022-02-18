@@ -77,7 +77,7 @@ const cartReducer = createReducer(initialState, (builder) => {
     .addCase(plusCartSaucesItem, (state, action) => {
       const key = action.payload;
       state.saucesItems[key].count++;
-
+      state.totalCount++;
       state.saucesItems[key].totalPrice += state.saucesItems[key].price;
       state.totalPrice += state.saucesItems[key].price;
 
@@ -117,6 +117,7 @@ const cartReducer = createReducer(initialState, (builder) => {
         state.items[sauces_key].totalPrice += price;
         state.items[sauces_key].count++;
       }
+      state.totalCount++;
       state.totalPrice += addedSauces.price;
     })
     .addCase(clearCart, (state) => {

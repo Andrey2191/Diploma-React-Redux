@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../common/button/Button";
-import minusLogo from "../../../assets/img/minus.svg";
-import plusLogo from "../../../assets/img/plus.svg";
+import Button from "../../../common/button/Button";
+import minusLogo from "../../../../assets/img/minus.svg";
+import plusLogo from "../../../../assets/img/plus.svg";
 import { IoClose } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
@@ -27,7 +27,6 @@ const CartSaucesItem = ({
   const handleMinusItem = () => {
     onMinus(id);
   };
-
   return (
     <div className={classNames("cart__item")}>
       <div className={classNames("cart__item-img")}>
