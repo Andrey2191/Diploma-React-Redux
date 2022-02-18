@@ -7,7 +7,7 @@ import userReducer from "../authorization/slice/userSlice";
 import orderReducer from "../OrderHistoryComponents/orderSlice";
 import pizzaReducer from "../pizzaComponents/pizzaSlice/pizzaSlice";
 import saucesReducer from "../saucesComponents/saucesSlice";
-import cartReducer from "../cartComponents/cartReducer/cartReducer";
+import cartReducer from "../cartComponents/containers/cartReducer/cartReducer";
 
 const persistConfig = {
   key: "root",
