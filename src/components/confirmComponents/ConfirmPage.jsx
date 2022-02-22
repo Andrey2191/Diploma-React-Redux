@@ -11,6 +11,7 @@ import { db } from "../../firebase";
 import { useAuth } from "../authorization/authorizationHook/use-auth";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -38,7 +39,17 @@ const ConfirmPage = () => {
   );
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
-    const docRef = addDoc(collection(db, "usersOrder"), {
+    // const docRef = addDoc(collection(db, "usersOrder"), {
+    //   name: valueName,
+    //   address: valueAddress,
+    //   telephone: valueTelephone,
+    //   email: email,
+    //   cost: totalPrice,
+    //   pizzas: items,
+    //   sauces: saucesItems,
+    //   totalCount: totalCount,
+    // });
+    const order = axios.post("http://localhost:5000/orders", {
       name: valueName,
       address: valueAddress,
       telephone: valueTelephone,

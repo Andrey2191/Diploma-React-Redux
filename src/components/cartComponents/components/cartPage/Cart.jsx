@@ -23,7 +23,6 @@ function Cart({
   onMinusSaucesItem,
   handleAddSaucesToCart,
 }) {
-  console.log(onPlusItem);
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items, saucesItems } = useSelector(
     (state) => state.cart
@@ -71,7 +70,7 @@ function Cart({
             {Object.keys(saucesItems).map((key) => (
               <CartSaucesItem
                 key={key}
-                id={saucesItems[key].id}
+                _id={saucesItems[key]._id}
                 imageUrl={saucesItems[key].imageUrl}
                 name={saucesItems[key].name}
                 totalPrice={saucesItems[key].totalPrice}
@@ -87,8 +86,8 @@ function Cart({
             {sauces &&
               sauces.map((obj) => (
                 <SaucesCard
-                  key={obj.id}
-                  id={obj.id}
+                  key={obj._id}
+                  _id={obj._id}
                   name={obj.name}
                   imageUrl={obj.imageUrl}
                   price={obj.price}

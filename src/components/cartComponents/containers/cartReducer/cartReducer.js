@@ -21,8 +21,9 @@ export const minusCartSaucesItem = createAction("MINUS_CART_SAUCES");
 const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addPizzaToCart, (state, action) => {
-      const { id, size, price, type, count } = action.payload;
-      const pizza_key = id + "_" + size + "_" + type;
+      const { _id, size, price, type, count } = action.payload;
+
+      const pizza_key = _id + "_" + size + "_" + type;
       const addedPizza = { ...action.payload };
 
       if (type === "традиционное") {
@@ -105,8 +106,8 @@ const cartReducer = createReducer(initialState, (builder) => {
       state.saucesItems = { ...state.saucesItems };
     })
     .addCase(addSaucesToCart, (state, action) => {
-      const { id, price } = action.payload;
-      const sauces_key = id;
+      const { _id, price } = action.payload;
+      const sauces_key = _id;
       const addedSauces = { ...action.payload };
 
       if (!state.saucesItems[sauces_key]) {

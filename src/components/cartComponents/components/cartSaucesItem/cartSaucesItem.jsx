@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 import classNames from "classnames";
 
 const CartSaucesItem = ({
-  id,
+  _id,
   name,
   totalPrice,
   totalCount,
@@ -17,15 +17,15 @@ const CartSaucesItem = ({
   imageUrl,
 }) => {
   const handleRemoveClick = () => {
-    onRemove(id);
+    onRemove(_id);
   };
 
   const handlePlusItem = () => {
-    onPlus(id);
+    onPlus(_id);
   };
 
   const handleMinusItem = () => {
-    onMinus(id);
+    onMinus(_id);
   };
   return (
     <div className={classNames("cart__item")}>

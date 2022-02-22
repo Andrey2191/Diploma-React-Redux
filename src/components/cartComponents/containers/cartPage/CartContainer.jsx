@@ -49,7 +49,7 @@ export default function CartContainer() {
   const handleAddSaucesToCart = (id) => {
     dispatch(addSaucesToCart(id));
   };
-  console.log(onPlusItem);
+
   return (
     <Cart
       onClearCart={onClearCart}

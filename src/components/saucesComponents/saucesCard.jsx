@@ -3,7 +3,7 @@ import React from "react";
 import Button from "../common/button/Button";
 
 export default function SaucesCard({
-  id,
+  _id,
   name,
   imageUrl,
   price,
@@ -11,7 +11,7 @@ export default function SaucesCard({
 }) {
   const onAddSauces = () => {
     const obj = {
-      id,
+      _id,
       name,
       imageUrl,
       price,

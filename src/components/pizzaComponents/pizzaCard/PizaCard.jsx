@@ -6,7 +6,7 @@ import { BsPlus } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
 function PizzaBlock({
-  id,
+  _id,
   name,
   imageUrl,
   price,
@@ -36,7 +36,7 @@ function PizzaBlock({
 
   const onAddPizza = () => {
     const obj = {
-      id,
+      _id,
       name,
       imageUrl,
       price,

@@ -8,6 +8,7 @@ export const fetchPizzas = createAsyncThunk(
       const items = [];
       const pizzas = await axios.get("http://localhost:5000/pizzas");
       pizzas.data.map((pizza) => items.push(pizza));
+
       return items;
     } catch (error) {
       console.log(error);
