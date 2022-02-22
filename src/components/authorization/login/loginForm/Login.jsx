@@ -9,7 +9,9 @@ const LoginForm = () => {
 
   const handleLogin = async (email, password) => {
     const resultAction = await dispatch(login({ email, password }));
+    console.log(login.fulfilled);
     if (login.fulfilled.match(resultAction)) {
+      console.log(123);
       history.push("/");
     } else {
       alert("Пользователь не найден!");

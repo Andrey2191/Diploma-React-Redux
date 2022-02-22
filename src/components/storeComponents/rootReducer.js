@@ -8,6 +8,7 @@ import orderReducer from "../OrderHistoryComponents/orderSlice";
 import pizzaReducer from "../pizzaComponents/pizzaSlice/pizzaSlice";
 import saucesReducer from "../saucesComponents/saucesSlice";
 import cartReducer from "../cartComponents/containers/cartReducer/cartReducer";
+import { pizzasApi } from "../pizzaComponents/query/PizzaQuery";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   sauces: saucesReducer,
   user: userReducer,
   orders: orderReducer,
+  [pizzasApi.reducerPath]: pizzasApi.reducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

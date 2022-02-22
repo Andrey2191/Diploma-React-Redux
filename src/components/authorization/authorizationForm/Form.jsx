@@ -43,7 +43,7 @@ export const FormAuth = ({ title, handleClick }) => {
           <Form onSubmit={handleSubmit}>
             <div className={classNames("input-row")}>
               <Input
-                type="email"
+                type="text"
                 name="email"
                 id="email"
                 className={classNames(

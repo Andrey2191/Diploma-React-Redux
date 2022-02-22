@@ -1,7 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "../../authorization/authorizationHook/use-auth";
-import { Redirect } from "react-router-dom";
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../..";
 import { setCategory, setSortBy } from "../../../redux/actions/filter";
 import { fetchPizzas } from "../../pizzaComponents/pizzaSlice/pizzaSlice";
@@ -25,14 +23,12 @@ function Home() {
   const cart = useSelector((state) => state.cart.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
-
   const pizzas = useSelector((state) => state.pizzas.pizzas);
-  const { isAuth } = useAuth();
 
   React.useEffect(() => {
     dispatch(fetchPizzas(sortBy, category));
   }, [category, sortBy]);
-  console.log(category);
+
   const onSelectCategory = React.useCallback((id) => {
     dispatch(setCategory(id));
   }, []);
