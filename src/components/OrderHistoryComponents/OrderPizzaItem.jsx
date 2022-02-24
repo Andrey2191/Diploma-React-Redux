@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 
 const OrderItem = ({
-  id,
+  _id,
   name,
   type,
   size,

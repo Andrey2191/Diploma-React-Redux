@@ -13,6 +13,7 @@ export const login = createAsyncThunk(
         email,
         password,
       });
+
       return user.data;
     } catch (error) {
       console.log({ error });

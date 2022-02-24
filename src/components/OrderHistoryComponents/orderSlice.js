@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -12,14 +13,10 @@ export const fetchOrder = createAsyncThunk(
   "orders/fetchOrder",
   async function (_, { rejectWithValue }) {
     try {
-      const orders = [];
-      const q = query(collection(db, "usersOrder"));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        const order = doc.data();
-        orders.push(order);
-      });
-      return orders;
+      const items = [];
+      const orders = await axios.get("http://localhost:5000/orders");
+      orders.data.map((order) => items.push(order));
+      return orders.data;
     } catch (error) {
       console.log(error);
       return rejectWithValue({ error: error.message });

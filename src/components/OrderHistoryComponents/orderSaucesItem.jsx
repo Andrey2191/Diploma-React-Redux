@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 
 const OrderSaucesItem = ({
-  id,
+  _id,
   name,
   type,
   size,

@@ -23,7 +23,6 @@ export default function OrderPage() {
 
       {orders.map((order, index) => {
         if (order.email === email) {
-          console.log(order);
           return (
             <div key={index} className={classNames("orderCard")}>
               <div className={classNames("order-title")}>
@@ -43,28 +42,32 @@ export default function OrderPage() {
               </div>
 
               <div className={classNames("order-body")}>
-                {Object.keys(order.pizzas).map((key) => (
-                  <OrderItem
-                    key={key}
-                    id={order.pizzas[key].id}
-                    imageUrl={order.pizzas[key].imageUrl}
-                    name={order.pizzas[key].name}
-                    type={order.pizzas[key].type}
-                    size={order.pizzas[key].size}
-                    totalPrice={order.pizzas[key].price}
-                    count={order.pizzas[key].count}
-                  />
-                ))}
-                {Object.keys(order.sauces).map((key) => (
-                  <OrderSaucesItem
-                    key={key}
-                    id={order.sauces[key].id}
-                    imageUrl={order.sauces[key].imageUrl}
-                    name={order.sauces[key].name}
-                    totalPrice={order.sauces[key].totalPrice}
-                    count={order.sauces[key].count}
-                  />
-                ))}
+                {order.pizzas.map((pizza) =>
+                  Object.keys(pizza).map((key) => (
+                    <OrderItem
+                      key={key}
+                      _id={pizza[key]._id}
+                      imageUrl={pizza[key].imageUrl}
+                      name={pizza[key].name}
+                      type={pizza[key].type}
+                      size={pizza[key].size}
+                      totalPrice={pizza[key].price}
+                      count={pizza[key].count}
+                    />
+                  ))
+                )}
+                {order.sauces.map((sauce) =>
+                  Object.keys(sauce).map((key) => (
+                    <OrderSaucesItem
+                      key={key}
+                      _id={sauce[key]._id}
+                      imageUrl={sauce[key].imageUrl}
+                      name={sauce[key].name}
+                      totalPrice={sauce[key].totalPrice}
+                      count={sauce[key].count}
+                    />
+                  ))
+                )}
               </div>
             </div>
           );
