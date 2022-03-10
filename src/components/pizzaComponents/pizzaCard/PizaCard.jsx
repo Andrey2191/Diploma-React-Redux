@@ -14,6 +14,7 @@ function PizzaBlock({
   sizes,
   onClickAddPizza,
   addedCount,
+  ingredients,
 }) {
   const obj = {
     thin: "тонкое",
@@ -42,6 +43,7 @@ function PizzaBlock({
       price,
       size: availableSizes[activeSize],
       type: availableTypes[activeType],
+      ingredients,
     };
     onClickAddPizza(obj);
   };
@@ -54,6 +56,12 @@ function PizzaBlock({
         alt="Pizza"
       />
       <h4 className={classNames("pizza-block__title")}>{name}</h4>
+      <div>
+        {ingredients.map((ingredient) => (
+          <b>{`${ingredient.name}, `}</b>
+        ))}
+      </div>
+
       <div className={classNames("pizza-block__selector")}>
         <ul>
           {availableTypes.map((type, index) => (

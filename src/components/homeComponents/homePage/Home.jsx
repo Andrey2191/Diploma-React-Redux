@@ -64,6 +64,7 @@ function Home() {
                 key={obj.id}
                 addedCount={cart?.count?.[obj.id]}
                 {...obj}
+                ingredients={obj.ingredients}
               />
             ))
           : Array(12)

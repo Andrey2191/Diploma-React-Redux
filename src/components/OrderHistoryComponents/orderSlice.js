@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { collection, getDocs, query } from "firebase/firestore";
-import { db } from "../../firebase";
 
 const initialState = {
   orders: [],
