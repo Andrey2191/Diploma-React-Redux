@@ -1,4 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -10,12 +11,14 @@ const initialState = {
 export const register = createAsyncThunk(
   "register",
   async ({ email, password }, thunkAPI) => {
-    const auth = getAuth();
+    // const auth = getAuth();
+    const user = await axios
+      .post("http://localhost:5000/auth/registration", { email, password })
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        console.log(user);
-      })
+      // createUserWithEmailAndPassword(auth, email, password)
+      //   .then(({ user }) => {
+      //     console.log(user);
+      //   })
       .catch((error) => thunkAPI.rejectWithValue({ error: error.message }));
   }
 );

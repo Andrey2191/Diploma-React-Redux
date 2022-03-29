@@ -61,7 +61,7 @@ function Home() {
           ? pizzas.map((obj) => (
               <PizzaBlock
                 onClickAddPizza={handleAddPizzaToCart}
-                key={obj.id}
+                key={obj._id}
                 addedCount={cart?.count?.[obj.id]}
                 {...obj}
                 ingredients={obj.ingredients}

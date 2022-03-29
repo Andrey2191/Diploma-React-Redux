@@ -2,11 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-const initialState = { email: null, token: null, id: null, error: null };
+const initialState = {
+  email: null,
+  token: null,
+  id: null,
+  role: null,
+  error: null,
+};
 
 export const login = createAsyncThunk(
   "login",
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue, getState }) => {
     try {
       console.log("login");
       const user = await axios.post("http://localhost:5000/auth/login", {
@@ -43,6 +49,7 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.token;
       state.id = action.payload.id;
+      state.role = action.payload.role;
     },
   },
 
@@ -50,8 +57,9 @@ const userSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       console.log(action);
       state.email = action.payload.email;
-      state.token = action.payload.accessToken;
+      state.token = action.payload.token;
       state.id = action.payload.uid;
+      state.role = action.payload.role;
       state.error = null;
     });
 

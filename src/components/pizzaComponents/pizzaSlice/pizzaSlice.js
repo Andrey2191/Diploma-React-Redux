@@ -3,10 +3,16 @@ import axios from "axios";
 
 export const fetchPizzas = createAsyncThunk(
   "pizzas/fetchPizzas",
-  async function (_, { rejectWithValue }) {
+  async function (_, { rejectWithValue, getState }) {
     try {
+      const token = getState().user.token;
+
+      // If we have a token set in state, let's assume that we should be passing it.
+
       const items = [];
-      const pizzas = await axios.get("http://localhost:5000/pizzas");
+      const pizzas = await axios.get("http://localhost:5000/pizzas", {
+        headers: { authorization: `Bearer ${token}` },
+      });
       pizzas.data.map((pizza) => items.push(pizza));
 
       // pizzas.data.map((qwe) =>
