@@ -3,9 +3,9 @@ import "./App.css";
 
 import { Header } from "./components";
 import { Home, Cart } from "./components/index";
-import Login from "./components/authorization/login/loginPage/Login";
-import Register from "./components/authorization/register/registerPage/Register";
-import OrderPage from "./components/OrderHistoryComponents/OrderPage";
+import Login from "./components/authorization/components/loginPage/Login";
+import Register from "./components/authorization/components/registerPage/Register";
+import OrderPage from "./components/OrderHistoryComponents/components/OrderPage";
 import ConfirmPage from "./components/confirmComponents/ConfirmPage";
 import { Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./components/common/privateRoute/PrivateRoute";

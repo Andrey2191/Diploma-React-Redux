@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchOrder } from "./orderSlice";
+import { fetchOrder } from "../containers/orderSlice";
 import { useEffect } from "react";
 import classNames from "classnames";
-import { useAuth } from "../authorization/authorizationHook/use-auth";
+import { useAuth } from "../../authorization/containers/authorizationHook/use-auth";
 import { Redirect } from "react-router-dom";
 import OrderItem from "./OrderPizzaItem";
 import OrderSaucesItem from "./orderSaucesItem";

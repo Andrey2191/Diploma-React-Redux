@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Error from "../common/error/Error";
 import { db } from "../../firebase";
-import { useAuth } from "../authorization/authorizationHook/use-auth";
+import { useAuth } from "../authorization/containers/authorizationHook/use-auth";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import axios from "axios";

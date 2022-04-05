@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { logout } from "../../authorization/slice/userSlice";
-import { useAuth } from "../../authorization/authorizationHook/use-auth";
+import { logout } from "../../authorization/containers/slice/userSlice";
+import { useAuth } from "../../authorization/containers/authorizationHook/use-auth";
 import { useDispatch } from "react-redux";
 import logoSvg from "../../../assets/img/pizza-logo.svg";
 import Button from "../button/Button";

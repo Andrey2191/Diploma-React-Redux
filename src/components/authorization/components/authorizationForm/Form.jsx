@@ -1,9 +1,9 @@
 import { Formik, Form } from "formik";
 import * as yup from "yup";
-import Error from "../../common/error/Error";
-import Input from "../../common/input/Input";
+import Error from "../../../common/error/Error";
+import Input from "../../../common/input/Input";
 import classNames from "classnames";
-import Button from "../../common/button/Button";
+import Button from "../../../common/button/Button";
 
 const validationSchema = yup.object().shape({
   email: yup

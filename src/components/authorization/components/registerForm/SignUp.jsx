@@ -1,6 +1,6 @@
-import { FormAuth } from "../../authorizationForm/Form";
+import { FormAuth } from "../authorizationForm/Form";
 import { useDispatch } from "react-redux";
-import { register } from "../../slice/registerSlice";
+import { register } from "../../containers/slice/registerSlice";
 
 export const SignUpForm = () => {
   const dispatch = useDispatch();

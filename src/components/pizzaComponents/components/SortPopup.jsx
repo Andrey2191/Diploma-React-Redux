@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import arrowTop from "../../../../assets/img/arrow-top.svg";
+import arrowTop from "../../../assets/img/arrow-top.svg";
 
 const SortPopup = React.memo(function SortPopup({
   items,

@@ -1,6 +1,6 @@
 import { persistStore } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
-import { pizzasApi } from "../pizzaComponents/query/PizzaQuery";
+import { pizzasApi } from "../pizzaComponents/containers/PizzaQuery";
 
 import rootReducer from "./rootReducer";
 
