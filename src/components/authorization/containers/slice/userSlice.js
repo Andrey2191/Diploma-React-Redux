@@ -14,11 +14,21 @@ export const login = createAsyncThunk(
   "login",
   async ({ email, password }, { rejectWithValue, getState }) => {
     try {
+      const token = getState().user.token;
+      const headers = {};
+      if (token) {
+        headers.authorization = `Bearer ${token}`;
+      }
+
       console.log("login");
-      const user = await axios.post("http://localhost:5000/login", {
-        email,
-        password,
-      });
+      const user = await axios.post(
+        "http://localhost:5000/login",
+        {
+          email,
+          password,
+        },
+        { headers }
+      );
 
       return user.data;
     } catch (error) {
