@@ -15,9 +15,9 @@ function AdminPage({}) {
     <div className={classNames("container ")}>
       <div className={classNames("cart")}>
         <h1>Список пользователей</h1>
-        {users.map((user) => (
-          <li>{user}</li>
-        ))}
+        {users.map((user) => {
+          return <li>{user}</li>;
+        })}
       </div>
     </div>
   );
