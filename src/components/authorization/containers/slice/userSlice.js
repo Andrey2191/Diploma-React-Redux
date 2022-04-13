@@ -29,7 +29,7 @@ export const login = createAsyncThunk(
         },
         { headers }
       );
-
+      console.log(user);
       return user.data;
     } catch (error) {
       console.log({ error });

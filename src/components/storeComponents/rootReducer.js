@@ -8,6 +8,8 @@ import pizzaReducer from "../pizzaComponents/containers/pizzaSlice";
 import saucesReducer from "../saucesComponents/containers/saucesSlice";
 import cartReducer from "../cartComponents/containers/cartReducer/cartReducer";
 import adminReducer from "../adminPanel/containers/adminSlice";
+import ingredientsReducer from "../createPizza/containers/ingredientsSlice";
+
 import { pizzasApi } from "../pizzaComponents/containers/PizzaQuery";
 
 const persistConfig = {
@@ -17,6 +19,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+  ingredients: ingredientsReducer,
   pizzas: pizzaReducer,
   cart: cartReducer,
   sauces: saucesReducer,

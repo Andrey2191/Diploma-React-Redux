@@ -1087,6 +1087,36 @@ body {
   transform: rotate(45deg);
 }
 
+.create-pizza-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.create-pizza-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ingredients-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  height: 300px;
+  /* border: 1px solid #111; */
+}
+
+.ingredients-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.ingredients-img img {
+  width: 150px;
+  height: 150px;
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     width: 1000px;
