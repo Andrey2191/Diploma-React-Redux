@@ -12,7 +12,7 @@ export const fetchIngredients = createAsyncThunk(
         headers: { authorization: `Bearer ${token}` },
       });
       ingredients.data.map((ingredient) => items.push(ingredient));
-      console.log(items);
+
       return items;
     } catch (error) {
       console.log(error);
@@ -25,11 +25,25 @@ const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState: {
     ingredients: [],
+    addedIngredients: {},
+    totalPrice: 0,
     status: null,
     error: null,
     isLoaded: null,
   },
-  reducers: {},
+  reducers: {
+    addIngredient(state, action) {
+      const { _id, price } = action.payload;
+      const ingredient_key = _id;
+      const addedIngredient = { ...action.payload };
+      console.log(action.payload);
+      if (!state.addedIngredients[ingredient_key]) {
+        state.addedIngredients[ingredient_key] = addedIngredient;
+      }
+
+      state.totalPrice += addedIngredient.price;
+    },
+  },
   extraReducers: {
     [fetchIngredients.pending]: (state) => {
       state.status = "loading";
@@ -45,3 +59,4 @@ const ingredientsSlice = createSlice({
 });
 
 export default ingredientsSlice.reducer;
+export const { addIngredient } = ingredientsSlice.actions;

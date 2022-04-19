@@ -6,14 +6,13 @@ export const fetchUsers = createAsyncThunk(
   async function (_, { rejectWithValue, getState }) {
     try {
       const token = getState().user.token;
-      const items = [];
 
       const users = await axios.get("http://localhost:5000/user", {
         headers: { authorization: `Bearer ${token}` },
       });
       console.log(users);
 
-      return users;
+      return users.data;
     } catch (error) {
       console.log(error);
       return rejectWithValue({ error: error.message });

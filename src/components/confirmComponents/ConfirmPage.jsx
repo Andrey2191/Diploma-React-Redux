@@ -1,16 +1,13 @@
 import React from "react";
 import Input from "../common/input/Input";
-import { collection, addDoc } from "firebase/firestore";
 import Button from "../common/button/Button";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Error from "../common/error/Error";
-import { db } from "../../firebase";
 import { useAuth } from "../authorization/containers/authorizationHook/use-auth";
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 const validationSchema = yup.object().shape({
@@ -33,22 +30,12 @@ const validationSchema = yup.object().shape({
 });
 
 const ConfirmPage = () => {
-  const { isAuth, email } = useAuth();
+  const { email } = useAuth();
   const { totalPrice, totalCount, items, saucesItems } = useSelector(
     ({ cart }) => cart
   );
 
   const sendOrder = (valueName, valueAddress, valueTelephone) => {
-    // const docRef = addDoc(collection(db, "usersOrder"), {
-    //   name: valueName,
-    //   address: valueAddress,
-    //   telephone: valueTelephone,
-    //   email: email,
-    //   cost: totalPrice,
-    //   pizzas: items,
-    //   sauces: saucesItems,
-    //   totalCount: totalCount,
-    // });
     const order = axios.post("http://localhost:5000/orders", {
       name: valueName,
       address: valueAddress,

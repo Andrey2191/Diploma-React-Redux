@@ -2,10 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import cartEmptyImage from "../../../../assets/img/empty-cart.png";
-import { CartItem, Button, SaucesCard } from "../../../index";
-
+import { Button, SaucesCard } from "../../../index";
 import { fetchSauces } from "../../../saucesComponents/containers/saucesSlice";
-import { useAuth } from "../../../authorization/containers/authorizationHook/use-auth";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons";
@@ -28,7 +26,6 @@ function Cart({
     (state) => state.cart
   );
   const sauces = useSelector((state) => state.sauces.sauces);
-  const { isAuth } = useAuth();
 
   React.useEffect(() => {
     dispatch(fetchSauces());

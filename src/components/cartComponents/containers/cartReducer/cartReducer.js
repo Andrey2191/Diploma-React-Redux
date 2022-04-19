@@ -3,6 +3,7 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 const initialState = {
   items: {},
   saucesItems: {},
+  customPizza: {},
   count: {},
   totalPrice: 0,
   totalCount: 0,
@@ -17,9 +18,28 @@ export const minusCartItem = createAction("MINUS_CART_ITEM");
 export const addSaucesToCart = createAction("ADD_SAUCES_CART");
 export const plusCartSaucesItem = createAction("PLUS_CART_SAUCES");
 export const minusCartSaucesItem = createAction("MINUS_CART_SAUCES");
+export const addCustomPizzaToCart = createAction("ADD_CUSTOM_PIZZA");
 
 const cartReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(addCustomPizzaToCart, (state, action) => {
+      const { _id, price } = action.payload;
+      const customPizza_key = _id;
+      const addedCustomPizza = { ...action.payload };
+
+      if (!state.customPizza[customPizza_key]) {
+        addedCustomPizza.count = 1;
+        addedCustomPizza.totalPrice = addedCustomPizza.price;
+        state.customPizza[customPizza_key] = addedCustomPizza;
+      } else {
+        state.customPizza[customPizza_key].totalPrice += addedCustomPizza.price;
+        state.customPizza[customPizza_key].count++;
+      }
+
+      state.totalCount++;
+      state.totalPrice += addedCustomPizza.price;
+    })
+
     .addCase(addPizzaToCart, (state, action) => {
       const { _id, size, price, type, count } = action.payload;
 

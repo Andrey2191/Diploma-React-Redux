@@ -1117,6 +1117,42 @@ body {
   height: 150px;
 }
 
+.user__card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.admin__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.added__ingredient {
+  margin-right: 10px;
+  font-weight: 550;
+}
+
+.added__ingredients {
+  height: 100px;
+  padding: 30px;
+  margin-bottom: 50px;
+}
+
+.added__ingredients-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ingredient__price {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     width: 1000px;

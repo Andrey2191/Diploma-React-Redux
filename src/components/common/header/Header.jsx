@@ -12,7 +12,7 @@ import classNames from "classnames";
 function Header() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
-  const { isAuth, email } = useAuth();
+  const { isAuth } = useAuth();
 
   return isAuth ? (
     <div className={classNames("header")}>

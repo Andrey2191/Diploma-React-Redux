@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../containers/adminSlice";
+import UserCard from "./UserCard";
 
 function AdminPage({}) {
   const dispatch = useDispatch();
@@ -15,9 +16,13 @@ function AdminPage({}) {
     <div className={classNames("container ")}>
       <div className={classNames("cart")}>
         <h1>Список пользователей</h1>
-        {users.map((user) => {
-          return <li>{user}</li>;
-        })}
+        <div className="admin__content">
+          {users.map((user) => {
+            return (
+              <UserCard id={user._id} email={user.email} banned={user.banned} />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

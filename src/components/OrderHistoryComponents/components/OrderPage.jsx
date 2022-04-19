@@ -4,14 +4,13 @@ import { fetchOrder } from "../containers/orderSlice";
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useAuth } from "../../authorization/containers/authorizationHook/use-auth";
-import { Redirect } from "react-router-dom";
 import OrderItem from "./OrderPizzaItem";
 import OrderSaucesItem from "./orderSaucesItem";
 
 export default function OrderPage() {
   const orders = useSelector((state) => state.orders.orders);
   const dispatch = useDispatch();
-  const { isAuth, email } = useAuth();
+  const { email } = useAuth();
   useEffect(() => {
     dispatch(fetchOrder());
   }, []);

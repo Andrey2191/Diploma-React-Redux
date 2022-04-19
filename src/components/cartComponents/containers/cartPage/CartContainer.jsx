@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import Cart from "../../components/cartPage/Cart";
-import CartSaucesItem from "../../components/cartSaucesItem/cartSaucesItem";
 import {
   plusCartItem,
   minusCartItem,
