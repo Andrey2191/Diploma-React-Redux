@@ -14,6 +14,7 @@ export const fetchOrder = createAsyncThunk(
       const items = [];
       const orders = await axios.get("http://localhost:5000/orders");
       orders.data.map((order) => items.push(order));
+
       return orders.data;
     } catch (error) {
       console.log(error);

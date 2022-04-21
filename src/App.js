@@ -11,6 +11,8 @@ import { Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./components/common/privateRoute/PrivateRoute";
 import AdminPage from "./components/adminPanel/components/AdminPage";
 import CreatePizza from "./components/createPizza/components/CreatePizza";
+import AdminOrders from "./components/adminPanel/components/AdminOrders";
+import AdminUsers from "./components/adminPanel/components/AdminUsers";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <PrivateRoute path="/confirm" component={ConfirmPage} exact />
           <PrivateRoute path="/admin" component={AdminPage} exact />
           <PrivateRoute path="/create" component={CreatePizza} exact />
+          <PrivateRoute path="/adminorders" component={AdminOrders} exact />
+          <PrivateRoute path="/adminusers" component={AdminUsers} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Register} exact />
         </Switch>

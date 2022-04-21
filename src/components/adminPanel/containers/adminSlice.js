@@ -10,8 +10,7 @@ export const fetchUsers = createAsyncThunk(
       const users = await axios.get("http://localhost:5000/user", {
         headers: { authorization: `Bearer ${token}` },
       });
-      console.log(users);
-
+      console.log(users.data);
       return users.data;
     } catch (error) {
       console.log(error);

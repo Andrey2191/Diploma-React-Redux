@@ -1,28 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../containers/adminSlice";
 import UserCard from "./UserCard";
+import AdminSidebar from "./AdminSidebar";
+import AdminWidget from "./AdminWidget";
+import { fetchOrder } from "../../OrderHistoryComponents/containers/orderSlice";
 
 function AdminPage({}) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.admin.users);
+  const orders = useSelector((state) => state.orders.orders);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchUsers());
   }, []);
-  console.log(users);
+
+  useEffect(() => {
+    dispatch(fetchOrder());
+  }, []);
+
   return (
-    <div className={classNames("container ")}>
-      <div className={classNames("cart")}>
-        <h1>Список пользователей</h1>
-        <div className="admin__content">
-          {users.map((user) => {
-            return (
-              <UserCard id={user._id} email={user.email} banned={user.banned} />
-            );
-          })}
-        </div>
+    <div className="admin__page">
+      <AdminSidebar />
+      <div className="admin__main">
+        <AdminWidget title="Всего пользователей" amount={users.length} />
+        <AdminWidget title="Всего заказов" amount={orders.length} />
       </div>
     </div>
   );
